@@ -476,6 +476,19 @@ flowchart TD
     F[HopitalApplication] -->|Configure| G[Sécurité+DB]
     G -->|Initialise| H[Données de test]
 ```
+## Résultats :
+- Page Login :
+- Page Accueil (pour Admin)
+- Page Acceuil (pour User)
+- Page Modification
+- Page Modification (Après la modification)
+- Page Suppression: Je supprime Mohamed avec id=7
+- Page Suppréssion: Aprés la suppréssion
+- Page Recherche:
+- Validation du formulaire
+- Page Ajouter:
+- Page Ajouter: Aprés l'ajout
+- Création de la table
 
 ## 🏁 Conclusion
 
