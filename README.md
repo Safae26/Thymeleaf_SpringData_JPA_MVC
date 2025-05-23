@@ -103,27 +103,25 @@ resources/templates/
   ```
 - schema.sql : Script d'initialisation de la base
 
-### Workflow
-1. L'utilisateur accède via les vues Thymeleaf
-2. Les contrôleurs traitent les requêtes
-3. Spring Data JPA gère la persistance
-4. Spring Security protège les routes
-   
-```
+## 🔄 Workflow d'Exécution
+
+### Diagramme de Séquence MVC
+
+```mermaid
 sequenceDiagram
-    participant Vue
-    participant Controller
-    participant Service
-    participant Repository
+    participant Vue as Vue (Thymeleaf)
+    participant Controller as Controller
+    participant Service as Service
+    participant Repository as Repository
     
-    Vue->>Controller: Requête HTTP
+    Vue->>Controller: Requête HTTP (GET/POST)
     Controller->>Service: Appel métier
-    Service->>Repository: Accès données
-    Repository-->>Service: Résultats
+    Service->>Repository: Accès données JPA
+    Repository-->>Service: Résultats DB
     Service-->>Controller: Données traitées
-    Controller-->>Vue: Modèle + Vue
+    Controller-->>Vue: Modèle + Vue HTML
 ```
-    
+
 ## Fonctionnalités
 ### Gestion Patients
 - ✅ CRUD complet
