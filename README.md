@@ -478,7 +478,10 @@ flowchart TD
 ```
 ## Résultats :
 - Page Login :
+  <img width="1280" alt="image" src="https://github.com/user-attachments/assets/f5ad6741-5c37-4354-a551-c2a670389665" />
+
 - Page Accueil (pour Admin)
+  
 - Page Acceuil (pour User)
 - Page Modification
 - Page Modification (Après la modification)
