@@ -42,6 +42,8 @@ net.safae.hospital
 └── security
 └── SecurityConfig
 ```
+<img width="467" alt="str1" src="https://github.com/user-attachments/assets/19ff60e1-dbf9-4d80-9168-231b21b37601" />
+<img width="467" alt="str2" src="https://github.com/user-attachments/assets/ab3deb44-ad0f-49fc-831f-49ffe1f5d460" />
 
 ### Architecture MVC
 
