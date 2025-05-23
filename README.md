@@ -156,6 +156,12 @@ classDiagram
         +builder() PatientBuilder
     }
 ```
+
+- @Data : Génère getters/setters
+- @Builder : Permet la construction fluide
+- @NoArgsConstructor : Constructeur par défaut
+- @AllArgsConstructor : Constructeur complet
+  
 Workflow de persistance :
 ```mermaid
 sequenceDiagram
