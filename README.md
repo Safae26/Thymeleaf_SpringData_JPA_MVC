@@ -145,6 +145,17 @@ public class Patient {
     private Double score;
 }
 ```
+``` mermaid
+classDiagram
+    class Patient {
+        +Long id
+        +String nom
+        +Date dateNaissance
+        +Boolean malade
+        +Double score
+        +builder() PatientBuilder
+    }
+```
 Exemple  d'utilisation :
 ```mermaid
 sequenceDiagram
