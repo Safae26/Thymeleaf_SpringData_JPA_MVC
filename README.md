@@ -174,6 +174,26 @@ sequenceDiagram
     DB-->>JPA: ID généré
     JPA-->>App: Patient persisté avec ID
 ```
+
+## 🗂️ Package repositories - PatientRepository
+
+```java
+public interface PatientRepository extends JpaRepository<Patient, Long> {
+    // Méthode dérivée automatique
+    Page<Patient> findByNomContains(String keyword, Pageable pageable);
+    
+    // Requête JPQL personnalisée
+    @Query("SELECT p FROM Patient p WHERE p.nom LIKE :x")
+    Page<Patient> chercher(@Param("x") String keyword, Pageable pageable);
+}
+```
+``` mermaid
+flowchart LR
+    A[Controller] -->|Appelle| B[PatientRepository]
+    B -->|Auto-implémente| C[Requêtes SQL]
+    C -->|Retourne| D[Résultats paginés]
+```
+
 ## Fonctionnalités
 ### Gestion Patients
 - ✅ CRUD complet
