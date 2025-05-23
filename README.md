@@ -123,6 +123,40 @@ sequenceDiagram
     Controller-->>Vue: Modèle + Vue HTML
 ```
 
+## 🗂 Package Entities - Classe Patient
+
+```java
+@Entity
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
+public class Patient {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @NotEmpty @Size(min = 4, max = 40)
+    private String nom;
+    
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dateNaissance;
+    
+    private Boolean malade;
+    
+    @DecimalMin("100")
+    private Double score;
+}
+```
+Exemple  d'utilisation :
+```mermaid
+sequenceDiagram
+    participant App as Application
+    participant JPA as JPA/Hibernate
+    participant DB as Base de données
+    
+    App->>JPA: patientRepository.save(patient)
+    JPA->>DB: INSERT INTO patient...
+    DB-->>JPA: ID généré
+    JPA-->>App: Patient persisté avec ID
+```
 ## Fonctionnalités
 ### Gestion Patients
 - ✅ CRUD complet
