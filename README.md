@@ -156,7 +156,7 @@ classDiagram
         +builder() PatientBuilder
     }
 ```
-Exemple  d'utilisation :
+Workflow de persistance :
 ```mermaid
 sequenceDiagram
     participant App as Application
