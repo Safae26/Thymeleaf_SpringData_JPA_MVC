@@ -187,6 +187,15 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     Page<Patient> chercher(@Param("x") String keyword, Pageable pageable);
 }
 ```
+
+Fonctionnalités clés :
+- Hérite des opérations CRUD de base via JpaRepository
+
+Deux types de requêtes :
+  - Méthode dérivée : Génération auto par Spring (findByNomContains)
+  - Requête custom : Contrôle précis via @Query
+Retourne des résultats paginés (Page<T> + Pageable)
+
 ``` mermaid
 flowchart LR
     A[Controller] -->|Appelle| B[PatientRepository]
