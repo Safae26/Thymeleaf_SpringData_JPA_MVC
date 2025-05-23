@@ -296,7 +296,111 @@ Options d'authentification :
 1. InMemory (pour tests)
 2. JDBC (base de données)
 3. Personnalisée (via UserDetailServiceImpl)
-   
+
+``` mermaid
+flowchart TB
+    A[Login Page] -->|Submit| B[SecurityConfig]
+    B --> C[UserDetailServiceImpl]
+    C --> D[AccountService]
+    D --> E[AppUserRepository]
+    E -->|Verify| F[(Database)]
+```
+Fonctionnalités activées :
+- Formulaire de login personnalisé
+- Protection CSRF
+- Remember-me (14 jours)
+- Contrôle d'accès par rôles
+
+Cela offre une sécurité complète tout en restant flexible pour différentes méthodes d'authentification.
+
+## 🌐 Package Web - Contrôleurs Principaux
+
+### 🏥 PatientController
+
+```java
+@Controller
+@RequiredArgsConstructor
+public class PatientController {
+    private final PatientRepository patientRepository;
+
+    @GetMapping("/patients")
+    public String index(Model model, 
+                       @RequestParam(defaultValue = "0") int page,
+                       @RequestParam(defaultValue = "") String keyword) {
+        Page<Patient> pagePatients = patientRepository.findByNomContains(keyword, PageRequest.of(page, 5));
+        model.addAttribute("patients", pagePatients.getContent());
+        model.addAttribute("pages", new int[pagePatients.getTotalPages()]);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("keyword", keyword);
+        return "patients";
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/delete")
+    public String delete(@RequestParam Long id, 
+                        @RequestParam int page,
+                        @RequestParam String keyword) {
+        patientRepository.deleteById(id);
+        return "redirect:/user/index?page="+page+"&keyword="+keyword;
+    }
+}
+```
+Fonctionnalités clés :
+  🔍 Recherche et pagination intégrées
+  🔒 Sécurisation des méthodes avec @PreAuthorize
+  📊 Transmission des données au modèle Thymeleaf
+  ↔️ Gestion des redirections avec paramètres
+
+### 🔐 SecurityController
+``` java
+@Controller
+public class SecurityController {
+    @GetMapping("/notAuthorized")
+    public String notAuthorized() {
+        return "notAuthorized";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+}
+```
+Rôle :
+  🚦 Gestion des vues de sécurité
+  🔐 Point d'entrée du login personnalisé
+  ⚠️ Affichage des erreurs d'autorisation
+
+## 🚀 Classe Principale - HopitalApplication
+``` java
+@SpringBootApplication
+public class HopitalApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(HopitalApplication.class, args);
+    }
+
+    @Bean
+    CommandLineRunner start(PatientRepository pr) {
+        return args -> {
+            // Initialisation des patients
+            Patient.builder().nom("Mohamed").score(100).build();
+            // ...
+        };
+    }
+
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+}
+```
+Fonctions principales :
+  🏗️ Initialisation des données au démarrage
+  🔐 Configuration du chiffrement des mots de passe
+  ⚙️ Point d'entrée de l'application Spring Boot
+
+
+
 ## Fonctionnalités
 ### Gestion Patients
 - ✅ CRUD complet
@@ -346,18 +450,56 @@ Options d'authentification :
 </dependencies>
 ```
 
-## Configuration
+## ⚙️ Configuration (application.properties)
+Accès console H2 : http://localhost:8086/h2-console
 ```
-# H2 Configuration
+# Application
+spring.application.name=Hospital
+server.port=8086
+
+# Database
 spring.datasource.url=jdbc:h2:mem:hospital
 spring.h2.console.enabled=true
-
-# MySQL Configuration (prod)
-# spring.datasource.url=jdbc:mysql://localhost:3306/hospital
-# spring.datasource.username=root
-# spring.datasource.password=secret
+spring.h2.console.path=/h2-console
+```
+``` mermaid
+flowchart TD
+    A[PatientController] -->|Gère| B[Patients]
+    A -->|Utilise| C[PatientRepository]
+    D[SecurityController] -->|Fournit| E[Vues Sécurité]
+    F[HopitalApplication] -->|Configure| G[Sécurité+DB]
+    G -->|Initialise| H[Données de test]
 ```
 
-## application.properties
+## 🏁 Conclusion
 
-# Auteur : Safae ERAJI
+Ce projet complet démontre la puissance de **Spring Boot** pour développer des applications web sécurisées et efficaces. À travers cette application hospitalière, nous avons implémenté :
+
+### ✅ Points Forts
+- **Architecture MVC propre** avec séparation claire des couches (Controller/Service/Repository)
+- **Sécurité robuste** combinant :
+  - Authentification personnalisée (JDBC + InMemory)
+  - Gestion fine des rôles (`@PreAuthorize`)
+  - Protection contre les injections SQL
+- **Expérience utilisateur optimale** :
+  - Pagination intelligente
+  - Recherche dynamique
+  - Validation des formulaires
+- **Productivité développeur** :
+  - Réduction de code avec Lombok
+  - Configuration simplifiée (Spring Boot Auto-configuration)
+  - Console H2 pour le débogage
+
+### 🌟 Bonnes Pratiques Appliquées
+```mermaid
+pie
+    title Principes Respectés
+    "Sécurité" : 30
+    "Maintenabilité" : 25
+    "Performance" : 20
+    "UX" : 15
+    "Tests" : 10
+```
+
+# Auteur : 
+Safae ERAJI
