@@ -1,4 +1,4 @@
-# Rapport README - Application de Gestion des Patients
+# Rapport - Application de Gestion des Patients
 
 ## Description du Projet
 Application Web JEE basée sur Spring MVC (L'architecture web Modèle-Vue-Contrôleur), Thymeleaf et Spring Data JPA pour la gestion des patients dans un hôpital.
