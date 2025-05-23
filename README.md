@@ -24,6 +24,7 @@ Elle doit permettre de :
   - Bootstrap
 
 ## 🧱 Structure des Packages
+```
 net.safae.hospital
 ├── entities
 │ ├── Patient
@@ -40,7 +41,7 @@ net.safae.hospital
 │ └── AccountService
 └── security
 └── SecurityConfig
-
+```
 
 ### Architecture MVC
 
