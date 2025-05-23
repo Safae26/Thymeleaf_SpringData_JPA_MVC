@@ -203,6 +203,100 @@ flowchart LR
     C -->|Retourne| D[Résultats paginés]
 ```
 
+## 🔒 Package Security - Gestion d'Authentification
+
+### 🏷️ Entités de Sécurité
+
+```java
+// AppRole.java
+@Entity @Data @Builder @NoArgsConstructor @AllArgsConstructor
+public class AppRole {
+    @Id 
+    private String role;  // "ADMIN", "USER", etc.
+}
+
+// AppUser.java
+@Entity @Data @Builder
+public class AppUser {
+    @Id @GeneratedValue
+    private Long id;
+    
+    @Column(unique=true)
+    private String username;
+    private String password;
+    
+    @ManyToMany(fetch=FetchType.EAGER)
+    private Set<AppRole> roles = new HashSet<>();
+}
+```
+Fonctionnalités :
+- Gestion des rôles et utilisateurs
+- Relation ManyToMany entre utilisateurs et rôles
+- Chargement immédiat des rôles (EAGER)
+
+## 📚 Repositories
+```java
+public interface AppRoleRepository extends JpaRepository<AppRole, String> {}
+
+public interface AppUserRepository extends JpaRepository<AppUser, Long> {
+    AppUser findByUsername(String username);
+}
+```
+Avantages :
+- CRUD automatique via JpaRepository
+- Recherche d'utilisateur par username
+
+## 🛠️ Services
+```java
+public interface AccountService {
+    AppUser addNewUser(String username, String password, String confirmPassword);
+    void addRoleToUser(String username, String roleName);
+    UserDetails loadUserByUsername(String username);
+}
+
+@Service @Transactional @RequiredArgsConstructor
+public class AccountServiceImpl implements AccountService {
+    private final AppUserRepository userRepo;
+    private final AppRoleRepository roleRepo;
+    private final PasswordEncoder passwordEncoder;
+
+    // Implémentation des méthodes
+}
+
+@Service @AllArgsConstructor
+public class UserDetailServiceImpl implements UserDetailsService {
+    private final AccountService accountService;
+    
+    public UserDetails loadUserByUsername(String username) {
+        // Conversion AppUser → UserDetails
+    }
+}
+```
+Fonctionnalités clés :
+- Gestion transactionnelle
+- Hachage des mots de passe
+- Conversion pour Spring Security
+
+## ⚙️ Configuration
+``` java
+@Configuration
+@EnableWebSecurity
+@EnableMethodSecurity
+public class SecurityConfig {
+    @Bean
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.formLogin(form -> form.loginPage("/login"));
+        http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
+        http.rememberMe(rm -> rm.key("secret").tokenValiditySeconds(1209600));
+        return http.build();
+    }
+}
+```
+Options d'authentification :
+1. InMemory (pour tests)
+2. JDBC (base de données)
+3. Personnalisée (via UserDetailServiceImpl)
+   
 ## Fonctionnalités
 ### Gestion Patients
 - ✅ CRUD complet
