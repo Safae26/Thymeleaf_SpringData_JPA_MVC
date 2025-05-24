@@ -372,14 +372,6 @@ Rôle :
 
 ### 📁 Templates
 ```
-resources/templates/
-├── template1.html         # Layout principal
-├── patients.html          # Liste des patients
-├── formPatients.html      # Formulaire création
-├── editPatients.html      # Formulaire édition
-├── login.html             # Page de connexion
-└── notAuthorized.html     # Erreur 403
-```
 | Fichier              | Description                  |
 |----------------------|------------------------------|
 | `patients.html`      | Liste des patients           |
@@ -387,7 +379,7 @@ resources/templates/
 | `editPatients.html`  | Formulaire d'édition         |
 | `login.html`         | Page de connexion            |
 | `notAuthorized.html` | Page d'erreur 403            |
-| `template1.html`     | Template de base             |
+| `template1.html`     | Template/Layout de base             |
 
 ### ⚙️ Fichiers de configuration
 - application.properties :
