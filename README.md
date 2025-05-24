@@ -448,6 +448,16 @@ flowchart TD
     F[HopitalApplication] -->|Configure| G[Sécurité+DB]
     G -->|Initialise| H[Données de test]
 ```
+
+- DB :
+<img width="713" alt="db" src="https://github.com/user-attachments/assets/ae97756c-0c9b-4aee-bd5a-c24907732d11" />
+- Patients :
+<img width="418" alt="patient" src="https://github.com/user-attachments/assets/31d27df5-5174-4df2-aeb9-7f677ebd1750" />
+- Users
+<img width="598" alt="image" src="https://github.com/user-attachments/assets/2fc6d696-6b81-4841-9fc5-1eaa2f16b2cc" />
+- Authorities :
+<img width="295" alt="image" src="https://github.com/user-attachments/assets/f0413515-eab1-4c54-998f-41cf5efb3a26" />
+
 ## Résultats :
 - Page Login :
   <img width="1279" alt="image" src="https://github.com/user-attachments/assets/114d9410-620c-479d-9e8d-369128153a52" />
