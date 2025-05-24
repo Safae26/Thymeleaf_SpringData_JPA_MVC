@@ -343,11 +343,6 @@ public class PatientController {
     }
 }
 ```
-Fonctionnalités clés :
-  🔍 Recherche et pagination intégrées
-  🔒 Sécurisation des méthodes avec @PreAuthorize
-  📊 Transmission des données au modèle Thymeleaf
-  ↔️ Gestion des redirections avec paramètres
 
 ### 🔐 SecurityController
 ``` java
@@ -363,12 +358,12 @@ public class SecurityController {
         return "login";
     }
 }
-```
-Rôle :
-  🚦 Gestion des vues de sécurité
-  🔐 Point d'entrée du login personnalisé
-  ⚠️ Affichage des erreurs d'autorisation
 
+### Sécurité
+- 🔒 2 modes d'authentification:
+  - InMemory (test)
+  - JDBC (prod)
+- 👥 Gestion des rôles
 
 ### 📁 Templates
 ```
@@ -434,11 +429,11 @@ public class HopitalApplication {
 }
 
 ## ⚙️ Configuration (application.properties)
-Accès console H2 : http://localhost:8086/h2-console
+Accès console H2 : http://localhost:8084/h2-console
 ```
 # Application
 spring.application.name=Hospital
-server.port=8086
+server.port=8084
 
 # Database
 spring.datasource.url=jdbc:h2:mem:hospital
