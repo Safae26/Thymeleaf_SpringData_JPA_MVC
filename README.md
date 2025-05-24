@@ -432,25 +432,6 @@ public class HopitalApplication {
         return new BCryptPasswordEncoder();
     }
 }
-```
-Fonctions principales :
-  🏗️ Initialisation des données au démarrage
-  🔐 Configuration du chiffrement des mots de passe
-  ⚙️ Point d'entrée de l'application Spring Boot
-
-
-
-## Fonctionnalités
-### Gestion Patients
-- ✅ CRUD complet
-- 🔍 Recherche & pagination
-- 📝 Validation de formulaires
-
-### Sécurité
-- 🔒 2 modes d'authentification:
-  - InMemory (test)
-  - JDBC (prod)
-- 👥 Gestion des rôles
 
 ## ⚙️ Configuration (application.properties)
 Accès console H2 : http://localhost:8086/h2-console
@@ -487,7 +468,7 @@ flowchart TD
   <img width="1280" alt="image" src="https://github.com/user-attachments/assets/bbecaacf-b028-4092-95a0-0660430dbec3" />
 - Page Suppréssion: Aprés la suppression
   <img width="1280" alt="image" src="https://github.com/user-attachments/assets/6b903568-aee5-4d96-a64b-5317db5a5eed" />
-- Page Recherche:
+- Page Recherche 🔍:
   <img width="1280" alt="image" src="https://github.com/user-attachments/assets/34d5e869-432f-4e94-b5a1-5f60d21585fe" />
 - Validation du formulaire
   <img width="1280" alt="image" src="https://github.com/user-attachments/assets/3730d51f-84ba-48f3-b2fe-33527dd2b0d5" />
