@@ -478,20 +478,27 @@ flowchart TD
 ```
 ## Résultats :
 - Page Login :
-  <img width="1280" alt="image" src="https://github.com/user-attachments/assets/f5ad6741-5c37-4354-a551-c2a670389665" />
-
+  <img width="1279" alt="image" src="https://github.com/user-attachments/assets/114d9410-620c-479d-9e8d-369128153a52" />
 - Page Accueil (pour Admin)
-  
+  <img width="1280" alt="image" src="https://github.com/user-attachments/assets/f45582ec-f6c6-4d99-85d4-620139a00d93" />
 - Page Acceuil (pour User)
+  <img width="1278" alt="image" src="https://github.com/user-attachments/assets/f7ad2e25-ede9-4e7a-b65d-c315e5ac56cd" />
 - Page Modification
+  <img width="1279" alt="image" src="https://github.com/user-attachments/assets/484b35cf-152c-40e0-8cc6-e619dc6f360f" />
 - Page Modification (Après la modification)
-- Page Suppression: Je supprime Mohamed avec id=7
-- Page Suppréssion: Aprés la suppréssion
+  <img width="1280" alt="image" src="https://github.com/user-attachments/assets/3a0b756d-ac64-447e-a1fe-74bbf38b3c87" />
+- Page Suppression: Je supprime Leila avec id=16
+  <img width="1280" alt="image" src="https://github.com/user-attachments/assets/bbecaacf-b028-4092-95a0-0660430dbec3" />
+- Page Suppréssion: Aprés la suppression
+  <img width="1280" alt="image" src="https://github.com/user-attachments/assets/6b903568-aee5-4d96-a64b-5317db5a5eed" />
 - Page Recherche:
+  <img width="1280" alt="image" src="https://github.com/user-attachments/assets/34d5e869-432f-4e94-b5a1-5f60d21585fe" />
 - Validation du formulaire
+  <img width="1280" alt="image" src="https://github.com/user-attachments/assets/3730d51f-84ba-48f3-b2fe-33527dd2b0d5" />
 - Page Ajouter:
+  <img width="1279" alt="image" src="https://github.com/user-attachments/assets/ceb91d11-df8b-46ac-bcaa-bcce425a5909" />
 - Page Ajouter: Aprés l'ajout
-- Création de la table
+  <img width="1280" alt="image" src="https://github.com/user-attachments/assets/886ee31a-e1f0-451a-a412-eef17ce6d49a" />
 
 ## 🏁 Conclusion
 
