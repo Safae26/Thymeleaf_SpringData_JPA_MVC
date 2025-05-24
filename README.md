@@ -501,9 +501,8 @@ flowchart TD
 
 ## 🏁 Conclusion
 
-Ce projet complet démontre la puissance de **Spring Boot** pour développer des applications web sécurisées et efficaces. À travers cette application hospitalière, nous avons implémenté :
+Ce projet complet démontre la puissance de **Spring Boot** pour développer des applications web sécurisées et efficaces. À travers cette application hospitalière, j'ai pu implémenté :
 
-### ✅ Points Forts
 - **Architecture MVC propre** avec séparation claire des couches (Controller/Service/Repository)
 - **Sécurité robuste** combinant :
   - Authentification personnalisée (JDBC + InMemory)
