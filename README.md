@@ -1,13 +1,5 @@
 # Application de Gestion Hospitalière - Rapport Technique
 
-## 📌 Table des Matières
-1. [Aperçu du Projet](#-aperçu-du-projet)
-2. [Stack Technologique](#-stack-technologique)
-3. [Architecture](#-architecture)
-4. [Fonctionnalités Clés](#-fonctionnalités-clés)
-5. [Démonstration](#-démonstration)
-6. [Conclusion](#-conclusion)
-
 ## Aperçu du Projet
 Application Web JEE basée sur Spring MVC (L'architecture web Modèle-Vue-Contrôleur), Thymeleaf et Spring Data JPA pour la gestion des patients dans un hôpital.
 
