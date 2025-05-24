@@ -53,28 +53,36 @@ pie
     "MySQL (Prod)" : 60
 ```
 
+## Dépendances Maven
+```xml
+<dependencies>
+    <!-- Spring -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    
+    <!-- Sécurité -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+
+    <!-- Templates -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+</dependencies>
+```
+
 ## 🧱 Structure des Packages
-```
-net.safae.hospital
-├── entities
-│ ├── Patient
-│ ├── AppUser
-│ └── AppRole
-├── repository
-│ ├── PatientRepository
-│ ├── AppUserRepository
-│ └── AppRoleRepository
-├── web
-│ ├── PatientController
-│ └── SecurityController
-├── service
-│ └── AccountService
-└── security
-└── SecurityConfig
-```
 
 <img width="467" alt="str1" src="https://github.com/user-attachments/assets/19ff60e1-dbf9-4d80-9168-231b21b37601" />
-
 
 <img width="467" alt="str2" src="https://github.com/user-attachments/assets/ab3deb44-ad0f-49fc-831f-49ffe1f5d460" />
 
@@ -119,44 +127,6 @@ public String index(Model model,
                    @RequestParam(defaultValue = "") String keyword) {
     // Pagination et recherche
 }
-```
-
-### 📁 Templates
-```
-resources/templates/
-├── template1.html         # Layout principal
-├── patients.html          # Liste des patients
-├── formPatients.html      # Formulaire création
-├── editPatients.html      # Formulaire édition
-├── login.html             # Page de connexion
-└── notAuthorized.html     # Erreur 403
-```
-
-### ⚙️ Fichiers de configuration
-- application.properties :
-  ```
-  spring.datasource.url=jdbc:h2:mem:hospital
-  spring.h2.console.enabled=true
-  ```
-- schema.sql : Script d'initialisation de la base
-
-## 🔄 Workflow d'Exécution
-
-### Diagramme de Séquence MVC
-
-```mermaid
-sequenceDiagram
-    participant Vue as Vue (Thymeleaf)
-    participant Controller as Controller
-    participant Service as Service
-    participant Repository as Repository
-    
-    Vue->>Controller: Requête HTTP (GET/POST)
-    Controller->>Service: Appel métier
-    Service->>Repository: Accès données JPA
-    Repository-->>Service: Résultats DB
-    Service-->>Controller: Données traitées
-    Controller-->>Vue: Modèle + Vue HTML
 ```
 
 ## 🗂 Package Entities - Classe Patient
@@ -407,6 +377,55 @@ Rôle :
   🔐 Point d'entrée du login personnalisé
   ⚠️ Affichage des erreurs d'autorisation
 
+
+### 📁 Templates
+```
+resources/templates/
+├── template1.html         # Layout principal
+├── patients.html          # Liste des patients
+├── formPatients.html      # Formulaire création
+├── editPatients.html      # Formulaire édition
+├── login.html             # Page de connexion
+└── notAuthorized.html     # Erreur 403
+```
+| Fichier              | Description                  |
+|----------------------|------------------------------|
+| `patients.html`      | Liste des patients           |
+| `formPatients.html`  | Formulaire d'ajout           |
+| `editPatients.html`  | Formulaire d'édition         |
+| `login.html`         | Page de connexion            |
+| `notAuthorized.html` | Page d'erreur 403            |
+| `template1.html`     | Template de base             |
+
+### ⚙️ Fichiers de configuration
+- application.properties :
+  ```
+  spring.datasource.url=jdbc:h2:mem:hospital
+  spring.h2.console.enabled=true
+  ```
+- schema.sql : Script d'initialisation de la base
+
+## 🔄 Workflow d'Exécution
+
+### Diagramme de Séquence MVC
+
+```mermaid
+sequenceDiagram
+    participant Vue as Vue (Thymeleaf)
+    participant Controller as Controller
+    participant Service as Service
+    participant Repository as Repository
+    
+    Vue->>Controller: Requête HTTP (GET/POST)
+    Controller->>Service: Appel métier
+    Service->>Repository: Accès données JPA
+    Repository-->>Service: Résultats DB
+    Service-->>Controller: Données traitées
+    Controller-->>Vue: Modèle + Vue HTML
+```
+
+
+
 ## 🚀 Classe Principale - HopitalApplication
 ``` java
 @SpringBootApplication
@@ -448,43 +467,6 @@ Fonctions principales :
   - InMemory (test)
   - JDBC (prod)
 - 👥 Gestion des rôles
-
-## Templates
-| Fichier              | Description                  |
-|----------------------|------------------------------|
-| `patients.html`      | Liste des patients           |
-| `formPatients.html`  | Formulaire d'ajout           |
-| `editPatients.html`  | Formulaire d'édition         |
-| `login.html`         | Page de connexion            |
-| `notAuthorized.html` | Page d'erreur 403            |
-| `template1.html`     | Template de base             |
-
-## Dépendances Maven
-```xml
-<dependencies>
-    <!-- Spring -->
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-data-jpa</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-    
-    <!-- Sécurité -->
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-security</artifactId>
-    </dependency>
-
-    <!-- Templates -->
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-thymeleaf</artifactId>
-    </dependency>
-</dependencies>
-```
 
 ## ⚙️ Configuration (application.properties)
 Accès console H2 : http://localhost:8086/h2-console
