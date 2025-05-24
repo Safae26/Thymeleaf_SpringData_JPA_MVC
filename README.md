@@ -8,7 +8,7 @@
 5. [Démonstration](#-démonstration)
 6. [Conclusion](#-conclusion)
 
-## Description du Projet
+## Aperçu du Projet
 Application Web JEE basée sur Spring MVC (L'architecture web Modèle-Vue-Contrôleur), Thymeleaf et Spring Data JPA pour la gestion des patients dans un hôpital.
 
 Elle doit permettre de :
@@ -29,6 +29,29 @@ Elle doit permettre de :
 - **Frontend**:
   - Le moteur de templates **Thymeleaf**
   - Bootstrap
+
+## 🛠️ Stack Technologique
+
+### Backend
+| Technologie | Usage |
+|-------------|-------|
+| ![Java](https://img.shields.io/badge/java-17-%23ED8B00) | Langage principal |
+| ![Spring Boot](https://img.shields.io/badge/spring%20boot-3.1.5-%236DB33F) | Framework core |
+| ![Spring Security](https://img.shields.io/badge/spring%20security-6.1-%236DB33F) | Authentification |
+
+### Frontend
+| Technologie | Usage |
+|-------------|-------|
+| ![Thymeleaf](https://img.shields.io/badge/thymeleaf-3.1-%23005C0F) | Templating |
+| ![Bootstrap](https://img.shields.io/badge/bootstrap-5.3-%23563D7C) | UI Components |
+
+### Base de Données
+```mermaid
+pie
+    title Utilisation BD
+    "H2 (Dev)" : 40
+    "MySQL (Prod)" : 60
+```
 
 ## 🧱 Structure des Packages
 ```
