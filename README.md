@@ -17,8 +17,7 @@ Elle doit permettre de :
   - Spring Data JPA pour la persistance des données
   - Spring Security pour la gestion de l'authentification et des autorisations
 - **Bases de données**:
-  - H2 (dev)
-  - MySQL (prod)
+  - J'ai commencé par H2, puis j'ai basculé vers MySQL
 - **Frontend**:
   - Le moteur de templates **Thymeleaf**
   - Bootstrap
