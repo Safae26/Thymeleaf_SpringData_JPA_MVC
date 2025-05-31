@@ -440,13 +440,14 @@ spring.datasource.url=jdbc:h2:mem:hospital
 spring.h2.console.enabled=true
 spring.h2.console.path=/h2-console
 ```
-``` mermaid
+```mermaid
 flowchart TD
     A[PatientController] -->|Gère| B[Patients]
     A -->|Utilise| C[PatientRepository]
     D[SecurityController] -->|Fournit| E[Vues Sécurité]
     F[HopitalApplication] -->|Configure| G[Sécurité+DB]
     G -->|Initialise| H[Données de test]
+
 ```
 
 - DB :
