@@ -1,5 +1,7 @@
 package net.safae.thymeleaf_springdata_jpa_mvc.security;
 
+import lombok.AllArgsConstructor;
+import net.safae.thymeleaf_springdata_jpa_mvc.security.service.UserDetailServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -15,11 +17,13 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity(prePostEnabled = true)// Il faut proteger les les endpoints moi meme au niveau de controleur
+@AllArgsConstructor
+@EnableMethodSecurity(prePostEnabled = true)// Il faut proteger les endpoints moi meme au niveau de controleur
 public class SecurityConfig {
 
+    private UserDetailServiceImpl userDetailServiceImpl;
 
-    // définir les utilisateurs qui ont le droit d 'accéder à l'application
+    // définir les utilisateurs qui ont le droit d'accéder à l'application
     //@Bean
     public InMemoryUserDetailsManager inMemoryUserDetailsManager(PasswordEncoder passwordEncoder){
         String encodedPassword = passwordEncoder.encode("1234");
@@ -55,7 +59,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated())
                 .exceptionHandling(exception ->{
                     exception.accessDeniedPage("/notAuthorized");
-                })
+                }).userDetailsService(userDetailServiceImpl)
                 .build();
     }
 }

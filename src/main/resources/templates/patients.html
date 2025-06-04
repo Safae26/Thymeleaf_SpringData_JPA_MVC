@@ -34,7 +34,7 @@
                         <td th:text="${p.score}"></td>
                         <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
                             <a
-                                    onclick="javascript:return confirm('Etes vous sure de vouloir supprimer ? ')"
+                                    onclick="javascript:return confirm('⚠️ Cette action est irréversible. Confirmez-vous la suppression ?')"
                                     th:href="@{/admin/delete(id=${p.id}, keyword=${keyword}, page=${currentPage})}"
                                     class="btn btn-danger"><i class="bi bi-trash"></i> Supprimer patient</a>
                         </td>

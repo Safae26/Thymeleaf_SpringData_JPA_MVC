@@ -29,6 +29,7 @@ public class Patient {
 
 
 }
+// Ameliorations
 // screenshots of classes, structure, SCREENSHOT DE DB MEM SI POSSIBLE  ou a mentionner, copier code au deepseek, screen de mysql data et table
 // Mettre le bootstrap  encore jolie, userdetailservice in service security, screenshots de linterface et du code
 
