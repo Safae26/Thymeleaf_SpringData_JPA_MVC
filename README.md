@@ -69,26 +69,26 @@ Application web complète pour la gestion des patients dans un environnement hos
 | `lombok` | 1.18.28 | Réduction du code boilerplate | ![Lombok](https://img.shields.io/badge/lombok-1.18.28-%23000000) |
 
 ### Frontend
-| Dépendance | Version | Description | Badge |
-|------------|---------|-------------|-------|
-| `spring-boot-starter-thymeleaf` | 3.5.0 | Templating côté serveur | ![Thymeleaf](https://img.shields.io/badge/thymeleaf-3.1-%23005C0F) |
-| `thymeleaf-layout-dialect` | 3.2.0 | Gestion des layouts | ![Layout](https://img.shields.io/badge/layout%20dialect-3.2-%23005C0F) |
-| `thymeleaf-extras-springsecurity6` | 3.1.2 | Intégration Thymeleaf + Security | ![Thymeleaf Security](https://img.shields.io/badge/thymeleaf%20security-3.1-%23005C0F) |
-| `bootstrap` (WebJars) | 5.3.5 | Framework CSS | ![Bootstrap](https://img.shields.io/badge/bootstrap-5.3-%23563D7C) |
-| `bootstrap-icons` | 1.11.1 | Bibliothèque d'icônes | ![Bootstrap Icons](https://img.shields.io/badge/icons-1.11-%23563D7C) |
-| `jquery` (WebJars) | 3.6.3 | Manipulation DOM | ![jQuery](https://img.shields.io/badge/jquery-3.6-%230769AD) |
+| Dépendance | Version | Description |
+|------------|---------|-------------|
+| `spring-boot-starter-thymeleaf` | 3.5.0 | Templating côté serveur |
+| `thymeleaf-layout-dialect` | 3.2.0 | Gestion des layouts |
+| `thymeleaf-extras-springsecurity6` | 3.1.2 | Intégration Thymeleaf + Security | 
+| `bootstrap` (WebJars) | 5.3.5 | Framework CSS |
+| `bootstrap-icons` | 1.11.1 | Bibliothèque d'icônes |
+| `jquery` (WebJars) | 3.6.3 | Manipulation DOM 
 
 ### Base de Données
-| Dépendance | Version | Scope | Badge |
-|------------|---------|-------|-------|
-| `h2` | 2.2.220 | runtime | ![H2](https://img.shields.io/badge/h2-2.2-%23ED8B00) |
-| `mysql-connector-j` | 8.0.33 | runtime | ![MySQL](https://img.shields.io/badge/mysql-8.0-%234479A1) |
+| Dépendance | Version | Scope |
+|------------|---------|-------|
+| `h2` | 2.2.220 | runtime |
+| `mysql-connector-j` | 8.0.33 | runtime |
 
 ### Développement
-| Dépendance | Version | Scope | Badge |
-|------------|---------|-------|-------|
-| `spring-boot-devtools` | 3.5.0 | optional | ![DevTools](https://img.shields.io/badge/devtools-3.5-%236DB33F) |
-| `spring-boot-starter-test` | 3.5.0 | test | ![Testing](https://img.shields.io/badge/spring%20test-3.5-%236DB33F) |
+| Dépendance | Version | Scope |
+|------------|---------|-------|
+| `spring-boot-devtools` | 3.5.0 | optional | 
+| `spring-boot-starter-test` | 3.5.0 | test | 
 
 ```xml
 <dependencies>
@@ -128,6 +128,7 @@ Application web complète pour la gestion des patients dans un environnement hos
         <version>1.11.1</version>
     </dependency>
 </dependencies>
+```
 
 ## 🧱 Structure des Packages
 
