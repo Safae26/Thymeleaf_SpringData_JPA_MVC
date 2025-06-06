@@ -521,12 +521,12 @@ public class PatientController {
 
 
 ```mermaid
-flowchart TD
-    A[PatientController] -->|Gère| B[Patients]
-    A -->|Utilise| C[PatientRepository]
-    D[SecurityController] -->|Fournit| E[Vues Sécurité]
-    F[HopitalApplication] -->|Configure| G[Sécurité+DB]
-    G -->|Initialise| H[Données de test]
+    flowchart TD
+        A[PatientController] -->|Gère| B[Patients]
+        A -->|Utilise| C[PatientRepository]
+        D[SecurityController] -->|Fournit| E[Vues Sécurité]
+        F[HopitalApplication] -->|Configure| G[Sécurité+DB]
+        G -->|Initialise| H[Données de test]
 ```
 
 ##### 🔐 SecurityController
