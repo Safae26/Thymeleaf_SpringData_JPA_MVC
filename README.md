@@ -209,7 +209,7 @@ flowchart TD
     - Deux types de requêtes :
       - Méthode dérivée : Génération auto par Spring (findByNomContains)
       - Requête custom : Contrôle précis via @Query
-      - Retourne des résultats paginés (Page<T> + Pageable)
+    Retourne des résultats paginés (Page<T> + Pageable)
 
 #### 🔐 Package security - Gestion d'Authentification
 
