@@ -141,26 +141,14 @@ Application web complète pour la gestion des patients dans un environnement hos
   Entité JPA représentant un patient avec :
   - `@Id` + `@GeneratedValue` pour l'identifiant
   - Validation des champs (`@NotEmpty`, `@Size`)
-  - Annotations Lombok pour réduire le code boilerplate
+  - Annotations Lombok pour réduire le code boilerplate :
+      - @Data : Génère getters/setters
+      - @Builder : Permet la construction fluide
+      - @NoArgsConstructor : Constructeur par défaut
+      - @AllArgsConstructor : Constructeur complet
  
   <img width="773" alt="image" src="https://github.com/user-attachments/assets/eb24a796-63f5-4a22-a0f5-3c8c76a99bfe" />
 
-    ``` mermaid
-    classDiagram
-        class Patient {
-            +Long id
-            +String nom
-            +Date dateNaissance
-            +Boolean malade
-            +Double score
-            +builder() PatientBuilder
-        }
-    ```
-    
-    - @Data : Génère getters/setters
-    - @Builder : Permet la construction fluide
-    - @NoArgsConstructor : Constructeur par défaut
-    - @AllArgsConstructor : Constructeur complet
       
     Workflow de persistance :
     ```mermaid
