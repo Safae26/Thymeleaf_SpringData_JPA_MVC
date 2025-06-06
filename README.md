@@ -549,7 +549,8 @@ public class PatientController {
 | `editPatients.html`  | Formulaire d'édition         |
 | `login.html`         | Page de connexion            |
 | `notAuthorized.html` | Page d'erreur 403            |
-| `template1.html`     | Template/Layout de base             |
+| `template1.html`     | Template/Layout de base      |
+```
 
 ### ⚙️ Fichiers de configuration
 - application.properties :
