@@ -759,16 +759,5 @@ Ce projet complet démontre la puissance de **Spring Boot** pour développer des
   - Configuration simplifiée (Spring Boot Auto-configuration)
   - Console H2 pour le débogage
 
-### 🌟 Bonnes Pratiques Appliquées
-```mermaid
-pie
-    title Principes Respectés
-    "Sécurité" : 30
-    "Maintenabilité" : 25
-    "Performance" : 20
-    "UX" : 15
-    "Tests" : 10
-```
-
 ## Auteur : 
 Safae ERAJI
