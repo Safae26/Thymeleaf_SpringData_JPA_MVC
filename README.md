@@ -157,8 +157,7 @@ Application web complète pour la gestion des patients dans un environnement hos
 
     Fonctionnalités clés :
     - Hérite des opérations CRUD de base via JpaRepository
-    
-    Deux types de requêtes :
+    - Deux types de requêtes :
       - Méthode dérivée : Génération auto par Spring (findByNomContains)
       - Requête custom : Contrôle précis via @Query
     Retourne des résultats paginés (Page<T> + Pageable)
