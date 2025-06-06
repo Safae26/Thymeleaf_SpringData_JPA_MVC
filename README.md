@@ -123,26 +123,8 @@ public String index(Model model,
 
 ## 🗂 Package Entities - Classe Patient
 
-```java
-@Entity
-@Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class Patient {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    @NotEmpty @Size(min = 4, max = 40)
-    private String nom;
-    
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dateNaissance;
-    
-    private Boolean malade;
-    
-    @DecimalMin("100")
-    private Double score;
-}
-```
+<img width="773" alt="image" src="https://github.com/user-attachments/assets/eb24a796-63f5-4a22-a0f5-3c8c76a99bfe" />
+
 ``` mermaid
 classDiagram
     class Patient {
