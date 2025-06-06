@@ -460,10 +460,11 @@ public class PatientController {
 
 ## ⚙️ Fichiers de configuration
 - application.properties :
+  
   <img width="773" alt="image" src="https://github.com/user-attachments/assets/551adc74-5903-4e58-a5ae-64e689941993" />
 
 - schema.sql : Script d'initialisation de la base
-  ``` sql
+  ```sql
   create table if not exists users(username varchar(50) not null primary key,password varchar(500) not null,enabled boolean not null);
   create table if not exists authorities (username varchar(50) not null,authority varchar(50) not null,constraint fk_authorities_users foreign key(username) references users(username));
   create unique index IF NOT EXISTS ix_auth_username on authorities (username,authority);
