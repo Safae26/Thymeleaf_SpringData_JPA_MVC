@@ -240,80 +240,51 @@ Avantages :
 
 
 ```java
-package net.safae.thymeleaf_springdata_jpa_mvc.security.service;
-
-import jakarta.transaction.Transactional;
-import lombok.AllArgsConstructor;
-import net.safae.thymeleaf_springdata_jpa_mvc.security.entities.AppRole;
-import net.safae.thymeleaf_springdata_jpa_mvc.security.entities.AppUser;
-import net.safae.thymeleaf_springdata_jpa_mvc.security.repo.AppRoleRepository;
-import net.safae.thymeleaf_springdata_jpa_mvc.security.repo.AppUserRepository;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.*;
-
-import java.util.UUID;
-
 @Service
 @Transactional
 @AllArgsConstructor
 public class AccountServiceImpl implements AccountService {
-    private AppUserRepository appUserRepository;
-    private PasswordEncoder passwordEncoder;
-    private AppRoleRepository appRoleRepository;
-    private AppUserRepository userRepository;
-    private AppRoleRepository roleRepository;
-
-    /*
-    public AccountServiceImpl(AppUserRepository appUserRepository, AppRoleRepository appRoleRepository) {
-        this.userRepository = appUserRepository;
-        this.roleRepository = appRoleRepository;
-    }
-     */
+    private final AppUserRepository userRepository;
+    private final AppRoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public AppUser addNewUser(String username, String password, String email, String confirmPassword) {
-        AppUser appUser = appUserRepository.findByUsername(username);
-        if(appUser != null) throw new RuntimeException("User already exists");
-        if(!password.equals(confirmPassword)) throw new RuntimeException("Passwords do not match");
-        appUser = AppUser.builder()
+        if (userRepository.findByUsername(username) != null) 
+            throw new RuntimeException("User already exists");
+        if (!password.equals(confirmPassword))
+            throw new RuntimeException("Passwords do not match");
+            
+        return userRepository.save(
+            AppUser.builder()
                 .userId(UUID.randomUUID().toString())
                 .username(username)
                 .password(passwordEncoder.encode(password))
                 .email(email)
-                .build();
-        AppUser savedAppUser = appUserRepository.save(appUser);
-        return savedAppUser;
+                .build()
+        );
     }
 
     @Override
     public AppRole addNewRole(String role) {
-        AppRole appRole = appRoleRepository.findById(role).orElse(null);
-        if(appRole != null) throw new RuntimeException("This role already exists");
-        appRole= AppRole.builder()
-                .role(role)
-                .build();
-        return appRoleRepository.save(appRole);
+        if (roleRepository.findById(role).isPresent())
+            throw new RuntimeException("Role already exists");
+            
+        return roleRepository.save(
+            AppRole.builder().role(role).build()
+        );
     }
 
     @Override
     public void addRoleToUser(String username, String role) {
-        AppUser appUser = appUserRepository.findByUsername(username);
-        AppRole appRole = appRoleRepository.findById(role).get();
-        appUser.getRoles().add(appRole);
-        //appUserRepository.save(appUser);
-    }
-
-    @Override
-    public void removeRoleFromUser(String username, String role) {
-        AppUser appUser = appUserRepository.findByUsername(username);
-        AppRole appRole = appRoleRepository.findById(role).get();
-        appUser.getRoles().remove(appRole);
-
+        AppUser user = userRepository.findByUsername(username);
+        AppRole appRole = roleRepository.findById(role).orElseThrow();
+        user.getRoles().add(appRole);
     }
 
     @Override
     public AppUser loadUserByUsername(String username) {
-        return appUserRepository.findByUsername(username);
+        return userRepository.findByUsername(username);
     }
 }
 ```
@@ -328,77 +299,43 @@ Fonctionnalités clés :
 ## ⚙️ Configuration
 
 ``` java
-package net.safae.thymeleaf_springdata_jpa_mvc.security;
-
-import lombok.AllArgsConstructor;
-import net.safae.thymeleaf_springdata_jpa_mvc.security.service.UserDetailServiceImpl;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
-import org.springframework.security.web.SecurityFilterChain;
-
-import javax.sql.DataSource;
-
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity(prePostEnabled = true)
 @AllArgsConstructor
-@EnableMethodSecurity(prePostEnabled = true)// Il faut proteger les endpoints moi meme au niveau de controleur
 public class SecurityConfig {
+    private final UserDetailServiceImpl userDetailServiceImpl;
 
-    private UserDetailServiceImpl userDetailServiceImpl;
-
-    // définir les utilisateurs qui ont le droit d'accéder à l'application
-    //@Bean
-    public InMemoryUserDetailsManager inMemoryUserDetailsManager(PasswordEncoder passwordEncoder){
-        String encodedPassword = passwordEncoder.encode("1234");
-        System.out.println(encodedPassword);
-        return new InMemoryUserDetailsManager(
-                User.withUsername("user1").password(encodedPassword).roles("USER").build(),
-                User.withUsername("user2").password(encodedPassword).roles("USER").build(),
-                User.withUsername("admin").password(encodedPassword).roles("USER","ADMIN").build()
-        );
-    }
-    //JDBC authentication
     @Bean
-    public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource){
-        // on spécifie le data source, où on a les rôles et les tables
-        return new JdbcUserDetailsManager(dataSource);
-    }
-    @Bean // Exécuter au démarrage
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-
-        return httpSecurity
-                .formLogin(form ->
-                        form.loginPage("/login")
-                                .defaultSuccessUrl("/user/index")
-                                .permitAll()
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/user/index")
+                        .permitAll()
                 )
                 .rememberMe(remember -> remember
-                        .key("my-unique-key")
-                        .tokenValiditySeconds(1209600)
-                        .userDetailsService(userDetailServiceImpl)  // Ajoutez cette ligne
+                        .key("unique-secure-key")
+                        .tokenValiditySeconds(1209600) // 14 jours
+                        .userDetailsService(userDetailServiceImpl)
                 )
-                .authorizeHttpRequests(ar ->ar.requestMatchers("/webjars/**").permitAll()
-                        .requestMatchers("/deletePatient/").hasRole("ADMIN")
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/webjars/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user/**").hasRole("USER")
-                        //.formLogin(Customizer.withDefaults())
-                        .anyRequest().authenticated())
-                .exceptionHandling(exception ->{
-                    exception.accessDeniedPage("/notAuthorized");
-                })
-                .userDetailsService(userDetailServiceImpl)
+                        .anyRequest().authenticated()
+                )
+                .exceptionHandling(exception -> 
+                    exception.accessDeniedPage("/notAuthorized")
+                )
                 .build();
     }
-}
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+}
 ```
 Options d'authentification :
 1. InMemory (pour tests)
@@ -419,26 +356,6 @@ Cela offre une sécurité complète tout en restant flexible pour différentes m
 ##### 🏥 PatientController 
 
 ```java
-package net.safae.thymeleaf_springdata_jpa_mvc.web;
-
-import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
-import net.safae.thymeleaf_springdata_jpa_mvc.entities.Patient;
-import net.safae.thymeleaf_springdata_jpa_mvc.repository.PatientRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
-
 @Controller
 @AllArgsConstructor
 public class PatientController {
@@ -516,9 +433,6 @@ public class PatientController {
         model.addAttribute("page", page);
         return "editPatients";
     }
-
-// Keyword et page dans la recherche, la modification et la suppression
-
 }
 ```
 
@@ -529,12 +443,12 @@ public class PatientController {
 
 ###### Sécurité
 - 🔒 2 modes d'authentification:
-  - InMemory (test)
-  - JDBC (prod)
+  - InMemory
+  - JDBC 
 - 👥 Gestion des rôles
 
 ###### 📁 Templates
-```
+
 | Fichier              | Description                  |
 |----------------------|------------------------------|
 | `patients.html`      | Liste des patients           |
@@ -543,40 +457,21 @@ public class PatientController {
 | `login.html`         | Page de connexion            |
 | `notAuthorized.html` | Page d'erreur 403            |
 | `template1.html`     | Template/Layout de base      |
-```
 
-### ⚙️ Fichiers de configuration
+## ⚙️ Fichiers de configuration
 - application.properties :
-
   <img width="773" alt="image" src="https://github.com/user-attachments/assets/551adc74-5903-4e58-a5ae-64e689941993" />
 
 - schema.sql : Script d'initialisation de la base
+  ``` sql
   create table if not exists users(username varchar(50) not null primary key,password varchar(500) not null,enabled boolean not null);
   create table if not exists authorities (username varchar(50) not null,authority varchar(50) not null,constraint fk_authorities_users foreign key(username) references users(username));
   create unique index IF NOT EXISTS ix_auth_username on authorities (username,authority);
-  
-
+  ```
 
 ## 🚀 Classe Principale
 
 ``` java
-package net.safae.thymeleaf_springdata_jpa_mvc;
-
-import net.safae.thymeleaf_springdata_jpa_mvc.entities.Patient;
-import net.safae.thymeleaf_springdata_jpa_mvc.repository.PatientRepository;
-import net.safae.thymeleaf_springdata_jpa_mvc.security.service.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
-
-import java.util.Date;
-
 @SpringBootApplication
 public class ThymeleafSpringDataJpaMvcApplication {
     @Autowired
