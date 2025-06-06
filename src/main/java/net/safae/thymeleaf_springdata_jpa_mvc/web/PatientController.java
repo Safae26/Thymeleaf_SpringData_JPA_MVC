@@ -96,8 +96,6 @@ public class PatientController {
         return "editPatients";
     }
 
-
-
 // Keyword et page dans la recherche, la modification et la suppression
 
 }
