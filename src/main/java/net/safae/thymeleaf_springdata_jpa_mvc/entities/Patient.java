@@ -29,5 +29,5 @@ public class Patient {
 
 
 }
-// structure, screen de mysql data et table
-// Mettre le bootstrap  encore jolie, userdetailservice in service security, screenshots de linterface et du code
+
+// screenshots de linterface
