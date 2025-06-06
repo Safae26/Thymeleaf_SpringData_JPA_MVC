@@ -60,13 +60,13 @@ Application web complète pour la gestion des patients dans un environnement hos
 ## 📦 Dépendances Maven
 
 ### Backend
-| Dépendance | Version | Description | Badge |
-|------------|---------|-------------|-------|
-| `spring-boot-starter-data-jpa` | 3.5.0 | Persistance JPA + Hibernate | ![JPA](https://img.shields.io/badge/spring%20data%20jpa-3.5.0-%236DB33F) |
-| `spring-boot-starter-security` | 3.5.0 | Authentification & Autorisation | ![Security](https://img.shields.io/badge/spring%20security-6.1-%236DB33F) |
-| `spring-boot-starter-validation` | 3.5.0 | Validation des formulaires | ![Validation](https://img.shields.io/badge/bean%20validation-3.0-%236DB33F) |
-| `spring-boot-starter-web` | 3.5.0 | Développement web MVC | ![Web](https://img.shields.io/badge/spring%20mvc-3.5.0-%236DB33F) |
-| `lombok` | 1.18.28 | Réduction du code boilerplate | ![Lombok](https://img.shields.io/badge/lombok-1.18.28-%23000000) |
+| Dépendance | Version | Description |
+|------------|---------|-------------|
+| `spring-boot-starter-data-jpa` | 3.5.0 | Persistance JPA + Hibernate |
+| `spring-boot-starter-security` | 3.5.0 | Authentification & Autorisation | 
+| `spring-boot-starter-validation` | 3.5.0 | Validation des formulaires |
+| `spring-boot-starter-web` | 3.5.0 | Développement web MVC |
+| `lombok` | 1.18.28 | Réduction du code boilerplate | 
 
 ### Frontend
 | Dépendance | Version | Description |
@@ -133,11 +133,6 @@ Application web complète pour la gestion des patients dans un environnement hos
 ## 🧱 Structure des Packages
 
 <img width="337" alt="image" src="https://github.com/user-attachments/assets/9c513485-5d90-410f-b0f1-5e9697a56417" />
-
-<img width="467" alt="str1" src="https://github.com/user-attachments/assets/19ff60e1-dbf9-4d80-9168-231b21b37601" />
-
-<img width="467" alt="str2" src="https://github.com/user-attachments/assets/ab3deb44-ad0f-49fc-831f-49ffe1f5d460" />
-
 
 ### Architecture MVC
 
