@@ -134,7 +134,7 @@ Application web complète pour la gestion des patients dans un environnement hos
 
 <img width="337" alt="image" src="https://github.com/user-attachments/assets/9c513485-5d90-410f-b0f1-5e9697a56417" />
 
-### Architecture globale de l'application
+## Architecture globale de l'application
 
 ```mermaid
 flowchart TD
@@ -183,10 +183,9 @@ flowchart TD
     SecurityCtrl -->|Protège| PatientCtrl
     AccountService -->|Gère rôles| PatientService
 ```
-
     
 #### 🗂 Package entities
-- **Patient.java**  
+
   Entité JPA représentant un patient avec :
   - `@Id` + `@GeneratedValue` pour l'identifiant
   - Validation des champs (`@NotEmpty`, `@Size`)
@@ -199,8 +198,6 @@ flowchart TD
   <img width="773" alt="image" src="https://github.com/user-attachments/assets/eb24a796-63f5-4a22-a0f5-3c8c76a99bfe" />
 
 #### 🗂 Package repository
-- **PatientRepository.java**
-
 
   <img width="774" alt="image" src="https://github.com/user-attachments/assets/4ce03f4a-f1a9-4d4f-bba4-a81d545d36d3" />
 
