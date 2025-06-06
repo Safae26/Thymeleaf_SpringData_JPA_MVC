@@ -1,49 +1,61 @@
 # Application de Gestion Hospitalière - Rapport Technique
 
-## Aperçu du Projet
-Application Web JEE basée sur Spring MVC (L'architecture web Modèle-Vue-Contrôleur), Thymeleaf et Spring Data JPA pour la gestion des patients dans un hôpital.
+![Java](https://img.shields.io/badge/java-17-%23ED8B00)
+![Spring Boot](https://img.shields.io/badge/spring%20boot-3.5.0-%236DB33F)
+![Spring Security](https://img.shields.io/badge/spring%20security-6.1-%236DB33F)
+![Thymeleaf](https://img.shields.io/badge/thymeleaf-3.1-%23005C0F)
+![Bootstrap](https://img.shields.io/badge/bootstrap-5.3-%23563D7C)
+![MySQL](https://img.shields.io/badge/mysql-8.0-%234479A1)
 
-Elle doit permettre de :
-- Gérer les patients (CRUD complet).
-- Implémenter une pagination des résultats.
-- Ajouter des fonctionnalités de recherche.
-- Sécuriser l'accès aux différentes fonctionnalités.
-- Utiliser un système de templates pour une interface cohérente.
-- Valider les données des formulaires.
+## 📝 Description du Projet
+Application web complète pour la gestion des patients dans un environnement hospitalier, développée avec :
+- Architecture Spring MVC (Modèle-Vue-Contrôleur)
+- Templating Thymeleaf
+- Persistance des données avec Spring Data JPA
+- Système de sécurité Spring Security
 
-## Technologies
-- **Backend**:
-  - Spring Boot (Framework principal)
-  - Spring Data JPA pour la persistance des données
-  - Spring Security pour la gestion de l'authentification et des autorisations
-- **Bases de données**:
-  - J'ai commencé par H2 (In Memory Database), puis j'ai basculé vers MySQL
-- **Frontend**:
-  - Le moteur de templates **Thymeleaf**
-  - Bootstrap
+## Fonctionnalités Principales
 
-## 🛠️ Stack Technologique
+### 🧑‍⚕️ Gestion des Patients
+- **CRUD complet** (Création, Lecture, Mise à jour, Suppression)
+- **fonctionnalités de recherche** 
+- **Pagination** des résultats
+- **Validation** des formulaires
+
+### 🔒 Sécurité
+- Authentification sécurisée
+- Gestion des rôles (Admin/Utilisateur)
+- Protection contre les attaques CSRF
+
+### 💻 Interface Utilisateur
+- Interface responsive avec **Bootstrap 5**
+- Templates cohérents avec **Thymeleaf**
+- **Bootstrap Icons** pour les pictogrammes
+
+## 🛠 Stack Technique
 
 ### Backend
-| Technologie | Usage |
-|-------------|-------|
-| ![Java](https://img.shields.io/badge/java-17-%23ED8B00) | Langage principal |
-| ![Spring Boot](https://img.shields.io/badge/spring%20boot-3.1.5-%236DB33F) | Framework core |
-| ![Spring Security](https://img.shields.io/badge/spring%20security-6.1-%236DB33F) | Authentification |
+| Technologie | Version | Usage |
+|------------|---------|-------|
+| Java | 17 | Langage principal |
+| Spring Boot | 3.5.0 | Framework principal |
+| Spring Data JPA | 3.5.0 | Persistance des données |
+| Spring Security | 6.1 | Gestion des accès (authentification et autorisations) |
+| Hibernate | (via Spring) | ORM |
 
 ### Frontend
-| Technologie | Usage |
-|-------------|-------|
-| ![Thymeleaf](https://img.shields.io/badge/thymeleaf-3.1-%23005C0F) | Templating |
-| ![Bootstrap](https://img.shields.io/badge/bootstrap-5.3-%23563D7C) | UI Components |
+| Technologie | Version | Usage |
+|------------|---------|-------|
+| moteur de templates Thymeleaf | 3.1 | Templating côté serveur |
+| Bootstrap | 5.3 | Framework CSS |
+| Bootstrap Icons | 1.11 | Bibliothèque d'icônes |
+| jQuery | 3.6 | Manipulation du DOM |
 
-### Base de Données
-```mermaid
-pie
-    title Utilisation BD
-    "H2 (Dev)" : 40
-    "MySQL (Prod)" : 60
-```
+### Bases de Données
+| Technologie | Usage |
+|------------|-------|
+| H2 | In Memory Database |
+| MySQL | Locale |
 
 ## Dépendances Maven
 ```xml
