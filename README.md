@@ -149,8 +149,36 @@ Application web complète pour la gestion des patients dans un environnement hos
  
   <img width="773" alt="image" src="https://github.com/user-attachments/assets/eb24a796-63f5-4a22-a0f5-3c8c76a99bfe" />
 
-      
-    Workflow de persistance :
+#### 🗂 Package repository
+- **PatientRepository.java**
+
+
+  <img width="774" alt="image" src="https://github.com/user-attachments/assets/4ce03f4a-f1a9-4d4f-bba4-a81d545d36d3" />
+
+    Fonctionnalités clés :
+    - Hérite des opérations CRUD de base via JpaRepository
+    
+    Deux types de requêtes :
+      - Méthode dérivée : Génération auto par Spring (findByNomContains)
+      - Requête custom : Contrôle précis via @Query
+    Retourne des résultats paginés (Page<T> + Pageable)
+    
+    ``` mermaid
+    flowchart LR
+        A[Controller] -->|Appelle| B[PatientRepository]
+        B -->|Auto-implémente| C[Requêtes SQL]
+        C -->|Retourne| D[Résultats paginés]
+    ```
+
+
+  Interface JpaRepository offrant :
+  ```java
+  Page<Patient> findByNomContains(String keyword, Pageable pageable);
+  
+  @Query("select p from Patient p where p.nom like :x")
+  Page<Patient> chercher(@Param("x") String keyword, Pageable pageable);
+
+  Workflow de persistance :
     ```mermaid
     sequenceDiagram
         participant App as Application
@@ -163,14 +191,8 @@ Application web complète pour la gestion des patients dans un environnement hos
         JPA-->>App: Patient persisté avec ID
     ```
 
-#### 🗂 Package repository
-- **PatientRepository.java**  
-  Interface JpaRepository offrant :
-  ```java
-  Page<Patient> findByNomContains(String keyword, Pageable pageable);
+
   
-  @Query("select p from Patient p where p.nom like :x")
-  Page<Patient> chercher(@Param("x") String keyword, Pageable pageable);
 
 #### 🔐 Package security
 - SecurityConfig.java
@@ -194,25 +216,6 @@ public String index(Model model,
                    @RequestParam(defaultValue = "") String keyword) {
     // Pagination et recherche
 }
-```
-
-## 🗂️ Package repositories - PatientRepository
-
-<img width="774" alt="image" src="https://github.com/user-attachments/assets/4ce03f4a-f1a9-4d4f-bba4-a81d545d36d3" />
-
-Fonctionnalités clés :
-- Hérite des opérations CRUD de base via JpaRepository
-
-Deux types de requêtes :
-  - Méthode dérivée : Génération auto par Spring (findByNomContains)
-  - Requête custom : Contrôle précis via @Query
-Retourne des résultats paginés (Page<T> + Pageable)
-
-``` mermaid
-flowchart LR
-    A[Controller] -->|Appelle| B[PatientRepository]
-    B -->|Auto-implémente| C[Requêtes SQL]
-    C -->|Retourne| D[Résultats paginés]
 ```
 
 ## 🔒 Package Security - Gestion d'Authentification
