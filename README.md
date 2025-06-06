@@ -178,28 +178,10 @@ flowchart LR
 
 ### 🏷️ Entités de Sécurité
 
-```java
-// AppRole.java
-@Entity @Data @Builder @NoArgsConstructor @AllArgsConstructor
-public class AppRole {
-    @Id 
-    private String role;  // "ADMIN", "USER", etc.
-}
+<img width="772" alt="image" src="https://github.com/user-attachments/assets/4178ae2c-e74e-440c-ad06-ab45d9114b60" />
 
-// AppUser.java
-@Entity @Data @Builder
-public class AppUser {
-    @Id @GeneratedValue
-    private Long id;
-    
-    @Column(unique=true)
-    private String username;
-    private String password;
-    
-    @ManyToMany(fetch=FetchType.EAGER)
-    private Set<AppRole> roles = new HashSet<>();
-}
-```
+<img width="773" alt="image" src="https://github.com/user-attachments/assets/264def7c-f8ea-492b-8bcb-573bcc362085" />
+
 Fonctionnalités :
 - Gestion des rôles et utilisateurs
 - Relation ManyToMany entre utilisateurs et rôles
