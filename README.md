@@ -136,63 +136,55 @@ Application web complète pour la gestion des patients dans un environnement hos
 
 ### Architecture MVC
 
+Architecture globale de l'application
 ```mermaid
 flowchart TD
+    subgraph Présentation
+        Vue[Vue Thymeleaf]
+        Login[Page Login]
+    end
+    
     subgraph Contrôleurs
-        A[PatientController]
-        D[SecurityController]
+        PatientCtrl[PatientController]
+        SecurityCtrl[SecurityController]
     end
     
-    subgraph Core
-        F[HopitalApplication]
+    subgraph Services
+        PatientService[PatientService]
+        AccountService[AccountService]
     end
     
-    subgraph Données
-        B[Patients]
-        H[(Données de test)]
+    subgraph Persistance
+        PatientRepo[PatientRepository]
+        UserRepo[AppUserRepository]
+        DB[(Base de données)]
     end
     
-    subgraph Infrastructure
-        C[PatientRepository]
-        G[(Sécurité+DB)]
+    subgraph Sécurité
+        SecurityConf[SecurityConfig]
+        UserDetails[UserDetailServiceImpl]
     end
     
-    A -->|Gère| B
-    A -->|Utilise| C
-    D -->|Fournit| E[Vues Sécurité]
-    F -->|Configure| G
-    G -->|Initialise| H
+    %% Flux principal
+    Vue <-->|Requêtes/Réponses| PatientCtrl
+    Login -->|Submit| SecurityConf
+    
+    %% Flux métier
+    PatientCtrl -->|Appelle| PatientService
+    PatientService -->|Utilise| PatientRepo
+    PatientRepo -->|Persiste| DB
+    
+    %% Flux sécurité
+    SecurityConf -->|Authentifie via| UserDetails
+    UserDetails -->|Utilise| AccountService
+    AccountService -->|Gère| UserRepo
+    UserRepo -->|Stocke| DB
+    
+    %% Relations transverses
+    SecurityCtrl -->|Protège| PatientCtrl
+    AccountService -->|Gère rôles| PatientService
 ```
-Diagramme de Séquence MVC
 
-```mermaid
-sequenceDiagram
-    participant Vue as Vue (Thymeleaf)
-    participant Controller as Controller
-    participant Service as Service
-    participant Repository as Repository
-    
-    Vue->>Controller: Requête HTTP (GET/POST)
-    Controller->>Service: Appel métier
-    Service->>Repository: Accès données JPA
-    Repository-->>Service: Résultats DB
-    Service-->>Controller: Données traitées
-    Controller-->>Vue: Modèle + Vue HTML
-```
-
-Workflow de persistance :
-
-```mermaid
-sequenceDiagram
-    participant App as Application
-    participant JPA as JPA/Hibernate
-    participant DB as Base de données
-        
-    App->>JPA: patientRepository.save(patient)
-    JPA->>DB: INSERT INTO patient...
-    DB-->>JPA: ID généré
-    JPA-->>App: Patient persisté avec ID
-```
     
 #### 🗂 Package entities
 - **Patient.java**  
@@ -414,14 +406,6 @@ Options d'authentification :
 2. JDBC (base de données)
 3. Personnalisée (via UserDetailServiceImpl)
 
-``` mermaid
-flowchart TB
-    A[Login Page] -->|Submit| B[SecurityConfig]
-    B --> C[UserDetailServiceImpl]
-    C --> D[AccountService]
-    D --> E[AppUserRepository]
-    E -->|Verify| F[(Database)]
-```
 Fonctionnalités activées :
 - Formulaire de login personnalisé
 - Protection CSRF
