@@ -134,9 +134,8 @@ Application web complète pour la gestion des patients dans un environnement hos
 
 <img width="337" alt="image" src="https://github.com/user-attachments/assets/9c513485-5d90-410f-b0f1-5e9697a56417" />
 
-### Architecture MVC
+### Architecture globale de l'application
 
-Architecture globale de l'application
 ```mermaid
 flowchart TD
     subgraph Présentation
