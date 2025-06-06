@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import net.safae.thymeleaf_springdata_jpa_mvc.security.service.UserDetailServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -48,18 +49,24 @@ public class SecurityConfig {
                         form.loginPage("/login")
                                 .defaultSuccessUrl("/user/index")
                                 .permitAll()
-                ).rememberMe(remember -> remember
+                )
+                .rememberMe(remember -> remember
                         .key("my-unique-key")
                         .tokenValiditySeconds(1209600)
+                        .userDetailsService(userDetailServiceImpl)  // Ajoutez cette ligne
                 )
                 .authorizeHttpRequests(ar ->ar.requestMatchers("/webjars/**").permitAll()
-                        //.requestMatchers("/deletePatient/").hasRole("ADMIN")
-                        //.requestMatchers("/admin/**").hasRole("ADMIN")
-                        //.requestMatchers("/user/**").hasRole("USER")
+                        .requestMatchers("/deletePatient/").hasRole("ADMIN")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/user/**").hasRole("USER")
+                        //.formLogin(Customizer.withDefaults())
                         .anyRequest().authenticated())
                 .exceptionHandling(exception ->{
                     exception.accessDeniedPage("/notAuthorized");
-                }).userDetailsService(userDetailServiceImpl)
+                })
+                .userDetailsService(userDetailServiceImpl)
                 .build();
     }
 }
+
+

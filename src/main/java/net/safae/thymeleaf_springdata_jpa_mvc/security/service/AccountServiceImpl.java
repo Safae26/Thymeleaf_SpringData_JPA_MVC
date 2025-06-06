@@ -15,16 +15,18 @@ import java.util.UUID;
 @Transactional
 @AllArgsConstructor
 public class AccountServiceImpl implements AccountService {
-    private final AppUserRepository appUserRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final AppRoleRepository appRoleRepository;
+    private AppUserRepository appUserRepository;
+    private PasswordEncoder passwordEncoder;
+    private AppRoleRepository appRoleRepository;
     private AppUserRepository userRepository;
     private AppRoleRepository roleRepository;
 
-    /*public AccountServiceImpl(AppUserRepository userRepository, AppRoleRepository roleRepository) {
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-    }*/
+    /*
+    public AccountServiceImpl(AppUserRepository appUserRepository, AppRoleRepository appRoleRepository) {
+        this.userRepository = appUserRepository;
+        this.roleRepository = appRoleRepository;
+    }
+     */
 
     @Override
     public AppUser addNewUser(String username, String password, String email, String confirmPassword) {
@@ -44,7 +46,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public AppRole addNewRole(String role) {
         AppRole appRole = appRoleRepository.findById(role).orElse(null);
-        if(appRole != null) throw new RuntimeException("Role already exists");
+        if(appRole != null) throw new RuntimeException("This role already exists");
         appRole= AppRole.builder()
                 .role(role)
                 .build();

@@ -98,6 +98,6 @@ public class PatientController {
 
 
 
-
+// Keyword et page dans la recherche, la modification et la suppression
 
 }
