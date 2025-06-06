@@ -558,12 +558,11 @@ public class PatientController {
 
 - schema.sql : Script d'initialisation de la base
 
-  create table if not exists users(username varchar(50) not null primary key,password varchar(500) not null,enabled boolean not null);
-  create table if not exists authorities (username varchar(50) not null,authority varchar(50) not null,constraint fk_authorities_users foreign key(username) references users(username));
-  create unique index IF NOT EXISTS ix_auth_username on authorities (username,authority);
+  
 
 
-## 🚀 Classe Principale 
+## 🚀 Classe Principale
+
 ``` java
 package net.safae.thymeleaf_springdata_jpa_mvc;
 
