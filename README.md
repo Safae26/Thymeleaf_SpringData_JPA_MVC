@@ -157,16 +157,7 @@ sequenceDiagram
 
 ## 🗂️ Package repositories - PatientRepository
 
-```java
-public interface PatientRepository extends JpaRepository<Patient, Long> {
-    // Méthode dérivée automatique
-    Page<Patient> findByNomContains(String keyword, Pageable pageable);
-    
-    // Requête JPQL personnalisée
-    @Query("SELECT p FROM Patient p WHERE p.nom LIKE :x")
-    Page<Patient> chercher(@Param("x") String keyword, Pageable pageable);
-}
-```
+<img width="774" alt="image" src="https://github.com/user-attachments/assets/4ce03f4a-f1a9-4d4f-bba4-a81d545d36d3" />
 
 Fonctionnalités clés :
 - Hérite des opérations CRUD de base via JpaRepository
