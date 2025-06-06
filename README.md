@@ -452,7 +452,21 @@ flowchart TD
 
 - DB :
   
-<img width="713" alt="db" src="https://github.com/user-attachments/assets/ae97756c-0c9b-4aee-bd5a-c24907732d11" />
+<img width="744" alt="db" src="https://github.com/user-attachments/assets/4ca21ca0-beb2-44c9-adb3-af735c60eb95" />
+
+Tables :
+
+- app_role :
+  
+<img width="200" alt="image" src="https://github.com/user-attachments/assets/db4b7d55-3b47-44fe-8c36-002ab5ab528a" />
+
+- app_user :
+  
+<img width="804" alt="image" src="https://github.com/user-attachments/assets/f119bfcd-a547-4f4c-a0cc-75fc0c6f84d2" />
+
+- app_user_role :
+
+<img width="250" alt="image" src="https://github.com/user-attachments/assets/81f3d994-6881-4d6f-bc30-0e5ec36d3393" />
 
 - Patients :
   
