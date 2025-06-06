@@ -136,6 +136,33 @@ Application web complète pour la gestion des patients dans un environnement hos
 
 ### Architecture MVC
 
+```mermaid
+flowchart TD
+    subgraph Contrôleurs
+        A[PatientController]
+        D[SecurityController]
+    end
+    
+    subgraph Core
+        F[HopitalApplication]
+    end
+    
+    subgraph Données
+        B[Patients]
+        H[(Données de test)]
+    end
+    
+    subgraph Infrastructure
+        C[PatientRepository]
+        G[(Sécurité+DB)]
+    end
+    
+    A -->|Gère| B
+    A -->|Utilise| C
+    D -->|Fournit| E[Vues Sécurité]
+    F -->|Configure| G
+    G -->|Initialise| H
+```
 Diagramme de Séquence MVC
 
 ```mermaid
@@ -510,23 +537,6 @@ public class PatientController {
 // Keyword et page dans la recherche, la modification et la suppression
 
 }
-```
-
-``` mermaid
-    flowchart LR
-        A[Controller] -->|Appelle| B[PatientRepository]
-        B -->|Auto-implémente| C[Requêtes SQL]
-        C -->|Retourne| D[Résultats paginés]
-    ```
-
-
-```mermaid
-    flowchart TD
-        A[PatientController] -->|Gère| B[Patients]
-        A -->|Utilise| C[PatientRepository]
-        D[SecurityController] -->|Fournit| E[Vues Sécurité]
-        F[HopitalApplication] -->|Configure| G[Sécurité+DB]
-        G -->|Initialise| H[Données de test]
 ```
 
 ##### 🔐 SecurityController
