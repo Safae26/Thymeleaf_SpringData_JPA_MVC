@@ -154,17 +154,18 @@ sequenceDiagram
 ```
 
 Workflow de persistance :
-    ```mermaid
-    sequenceDiagram
-        participant App as Application
-        participant JPA as JPA/Hibernate
-        participant DB as Base de données
+
+```mermaid
+sequenceDiagram
+    participant App as Application
+    participant JPA as JPA/Hibernate
+    participant DB as Base de données
         
-        App->>JPA: patientRepository.save(patient)
-        JPA->>DB: INSERT INTO patient...
-        DB-->>JPA: ID généré
-        JPA-->>App: Patient persisté avec ID
-    ```
+    App->>JPA: patientRepository.save(patient)
+    JPA->>DB: INSERT INTO patient...
+    DB-->>JPA: ID généré
+    JPA-->>App: Patient persisté avec ID
+```
     
 #### 🗂 Package entities
 - **Patient.java**  
