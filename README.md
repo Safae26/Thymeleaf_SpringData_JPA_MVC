@@ -7,7 +7,7 @@
 ![Bootstrap](https://img.shields.io/badge/bootstrap-5.3-%23563D7C)
 ![MySQL](https://img.shields.io/badge/mysql-8.0-%234479A1)
 
-## 📝 Description du Projet
+## Description du Projet
 Application web complète pour la gestion des patients dans un environnement hospitalier, développée avec :
 - Architecture Spring MVC (Modèle-Vue-Contrôleur)
 - Templating Thymeleaf
@@ -27,7 +27,7 @@ Application web complète pour la gestion des patients dans un environnement hos
 - Gestion des rôles (Admin/Utilisateur)
 - Protection contre les attaques CSRF
 
-### 💻 Interface Utilisateur
+### Interface Utilisateur
 - Interface responsive avec **Bootstrap 5**
 - Templates cohérents avec **Thymeleaf**
 - **Bootstrap Icons** pour les pictogrammes
@@ -57,82 +57,77 @@ Application web complète pour la gestion des patients dans un environnement hos
 | H2 | In Memory Database |
 | MySQL | Locale |
 
-## Dépendances Maven
+## 📦 Dépendances Maven
+
+### Backend
+| Dépendance | Version | Description | Badge |
+|------------|---------|-------------|-------|
+| `spring-boot-starter-data-jpa` | 3.5.0 | Persistance JPA + Hibernate | ![JPA](https://img.shields.io/badge/spring%20data%20jpa-3.5.0-%236DB33F) |
+| `spring-boot-starter-security` | 3.5.0 | Authentification & Autorisation | ![Security](https://img.shields.io/badge/spring%20security-6.1-%236DB33F) |
+| `spring-boot-starter-validation` | 3.5.0 | Validation des formulaires | ![Validation](https://img.shields.io/badge/bean%20validation-3.0-%236DB33F) |
+| `spring-boot-starter-web` | 3.5.0 | Développement web MVC | ![Web](https://img.shields.io/badge/spring%20mvc-3.5.0-%236DB33F) |
+| `lombok` | 1.18.28 | Réduction du code boilerplate | ![Lombok](https://img.shields.io/badge/lombok-1.18.28-%23000000) |
+
+### Frontend
+| Dépendance | Version | Description | Badge |
+|------------|---------|-------------|-------|
+| `spring-boot-starter-thymeleaf` | 3.5.0 | Templating côté serveur | ![Thymeleaf](https://img.shields.io/badge/thymeleaf-3.1-%23005C0F) |
+| `thymeleaf-layout-dialect` | 3.2.0 | Gestion des layouts | ![Layout](https://img.shields.io/badge/layout%20dialect-3.2-%23005C0F) |
+| `thymeleaf-extras-springsecurity6` | 3.1.2 | Intégration Thymeleaf + Security | ![Thymeleaf Security](https://img.shields.io/badge/thymeleaf%20security-3.1-%23005C0F) |
+| `bootstrap` (WebJars) | 5.3.5 | Framework CSS | ![Bootstrap](https://img.shields.io/badge/bootstrap-5.3-%23563D7C) |
+| `bootstrap-icons` | 1.11.1 | Bibliothèque d'icônes | ![Bootstrap Icons](https://img.shields.io/badge/icons-1.11-%23563D7C) |
+| `jquery` (WebJars) | 3.6.3 | Manipulation DOM | ![jQuery](https://img.shields.io/badge/jquery-3.6-%230769AD) |
+
+### Base de Données
+| Dépendance | Version | Scope | Badge |
+|------------|---------|-------|-------|
+| `h2` | 2.2.220 | runtime | ![H2](https://img.shields.io/badge/h2-2.2-%23ED8B00) |
+| `mysql-connector-j` | 8.0.33 | runtime | ![MySQL](https://img.shields.io/badge/mysql-8.0-%234479A1) |
+
+### Développement
+| Dépendance | Version | Scope | Badge |
+|------------|---------|-------|-------|
+| `spring-boot-devtools` | 3.5.0 | optional | ![DevTools](https://img.shields.io/badge/devtools-3.5-%236DB33F) |
+| `spring-boot-starter-test` | 3.5.0 | test | ![Testing](https://img.shields.io/badge/spring%20test-3.5-%236DB33F) |
+
 ```xml
 <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
+    <!-- Spring Boot Starters -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    
+    <!-- Sécurité -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.thymeleaf.extras</groupId>
+        <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+    </dependency>
 
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>bootstrap</artifactId>
-            <version>5.3.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>nz.net.ultraq.thymeleaf</groupId>
-            <artifactId>thymeleaf-layout-dialect</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>jquery</artifactId>
-            <version>3.6.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars.npm</groupId>
-            <artifactId>bootstrap-icons</artifactId>
-            <version>1.11.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.thymeleaf.extras</groupId>
-            <artifactId>thymeleaf-extras-springsecurity6</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-```
+    <!-- Frontend -->
+    <dependency>
+        <groupId>org.webjars</groupId>
+        <artifactId>bootstrap</artifactId>
+        <version>5.3.5</version>
+    </dependency>
+    <dependency>
+        <groupId>org.webjars.npm</groupId>
+        <artifactId>bootstrap-icons</artifactId>
+        <version>1.11.1</version>
+    </dependency>
+</dependencies>
 
 ## 🧱 Structure des Packages
 
