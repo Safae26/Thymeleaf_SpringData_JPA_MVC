@@ -160,64 +160,9 @@ Application web complète pour la gestion des patients dans un environnement hos
     - Deux types de requêtes :
       - Méthode dérivée : Génération auto par Spring (findByNomContains)
       - Requête custom : Contrôle précis via @Query
-    Retourne des résultats paginés (Page<T> + Pageable)
-    
-    ``` mermaid
-    flowchart LR
-        A[Controller] -->|Appelle| B[PatientRepository]
-        B -->|Auto-implémente| C[Requêtes SQL]
-        C -->|Retourne| D[Résultats paginés]
-    ```
+      - Retourne des résultats paginés (Page<T> + Pageable)
 
-
-  Interface JpaRepository offrant :
-  ```java
-  Page<Patient> findByNomContains(String keyword, Pageable pageable);
-  
-  @Query("select p from Patient p where p.nom like :x")
-  Page<Patient> chercher(@Param("x") String keyword, Pageable pageable);
-
-  Workflow de persistance :
-    ```mermaid
-    sequenceDiagram
-        participant App as Application
-        participant JPA as JPA/Hibernate
-        participant DB as Base de données
-        
-        App->>JPA: patientRepository.save(patient)
-        JPA->>DB: INSERT INTO patient...
-        DB-->>JPA: ID généré
-        JPA-->>App: Patient persisté avec ID
-    ```
-
-
-  
-
-#### 🔐 Package security
-- SecurityConfig.java
-Configuration Spring Security avec :
-```
-@EnableWebSecurity
-@EnableMethodSecurity
-public class SecurityConfig {
-    // Configuration des règles d'accès
-    // Authentification InMemory/JDBC/Personnalisée
-}
-```
-
-#### 🌐 Package web
-- PatientController.java
-Contrôleur MVC avec :
-```
-@GetMapping("/patients")
-public String index(Model model, 
-                   @RequestParam(defaultValue = "0") int page,
-                   @RequestParam(defaultValue = "") String keyword) {
-    // Pagination et recherche
-}
-```
-
-## 🔒 Package Security - Gestion d'Authentification
+#### 🔐 Package security - Gestion d'Authentification
 
 ### 🏷️ Entités de Sécurité
 
@@ -244,6 +189,7 @@ Avantages :
 
 
 <img width="785" alt="aser" src="https://github.com/user-attachments/assets/3bdd8d76-9d00-49b0-b18c-a3138381c546" />
+
 
 ```java
 package net.safae.thymeleaf_springdata_jpa_mvc.security.service;
@@ -332,6 +278,7 @@ Fonctionnalités clés :
 - Conversion pour Spring Security
 
 ## ⚙️ Configuration
+
 ``` java
 package net.safae.thymeleaf_springdata_jpa_mvc.security;
 
@@ -427,6 +374,38 @@ Fonctionnalités activées :
 - Contrôle d'accès par rôles
 
 Cela offre une sécurité complète tout en restant flexible pour différentes méthodes d'authentification.
+
+
+#### 🌐 Package web
+- PatientController.java
+Contrôleur MVC avec :
+```
+@GetMapping("/patients")
+public String index(Model model, 
+                   @RequestParam(defaultValue = "0") int page,
+                   @RequestParam(defaultValue = "") String keyword) {
+    // Pagination et recherche
+}
+```
+
+Workflow de persistance :
+    ```mermaid
+    sequenceDiagram
+        participant App as Application
+        participant JPA as JPA/Hibernate
+        participant DB as Base de données
+        
+        App->>JPA: patientRepository.save(patient)
+        JPA->>DB: INSERT INTO patient...
+        DB-->>JPA: ID généré
+        JPA-->>App: Patient persisté avec ID
+    ```
+    ``` mermaid
+    flowchart LR
+        A[Controller] -->|Appelle| B[PatientRepository]
+        B -->|Auto-implémente| C[Requêtes SQL]
+        C -->|Retourne| D[Résultats paginés]
+    ```
 
 ## 🌐 Package Web - Contrôleurs Principaux
 
