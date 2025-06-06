@@ -124,6 +124,8 @@ pie
 
 ## 🧱 Structure des Packages
 
+<img width="337" alt="image" src="https://github.com/user-attachments/assets/9c513485-5d90-410f-b0f1-5e9697a56417" />
+
 <img width="467" alt="str1" src="https://github.com/user-attachments/assets/19ff60e1-dbf9-4d80-9168-231b21b37601" />
 
 <img width="467" alt="str2" src="https://github.com/user-attachments/assets/ab3deb44-ad0f-49fc-831f-49ffe1f5d460" />
