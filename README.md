@@ -470,7 +470,7 @@ Tables :
 
 - Patients :
   
-<img width="418" alt="patient" src="https://github.com/user-attachments/assets/31d27df5-5174-4df2-aeb9-7f677ebd1750" />
+<img width="419" alt="image" src="https://github.com/user-attachments/assets/ee32a5aa-cd48-4c39-be30-34a03d227b6d" />
 
 - Users :
   
