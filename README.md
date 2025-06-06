@@ -686,7 +686,7 @@ flowchart TD
     G -->|Initialise| H[Données de test]
 ```
 
-## DB :
+## Base de données :
   
 <img width="744" alt="db" src="https://github.com/user-attachments/assets/4ca21ca0-beb2-44c9-adb3-af735c60eb95" />
 
