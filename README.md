@@ -692,29 +692,29 @@ flowchart TD
 
 ### Tables :
 
-    - app_role :
+- app_role :
       
-    <img width="200" alt="image" src="https://github.com/user-attachments/assets/db4b7d55-3b47-44fe-8c36-002ab5ab528a" />
+<img width="200" alt="image" src="https://github.com/user-attachments/assets/db4b7d55-3b47-44fe-8c36-002ab5ab528a" />
     
-    - app_user :
+- app_user :
       
-    <img width="804" alt="image" src="https://github.com/user-attachments/assets/f119bfcd-a547-4f4c-a0cc-75fc0c6f84d2" />
+<img width="804" alt="image" src="https://github.com/user-attachments/assets/f119bfcd-a547-4f4c-a0cc-75fc0c6f84d2" />
     
-    - app_user_role :
+- app_user_role :
     
-    <img width="250" alt="image" src="https://github.com/user-attachments/assets/81f3d994-6881-4d6f-bc30-0e5ec36d3393" />
+<img width="250" alt="image" src="https://github.com/user-attachments/assets/81f3d994-6881-4d6f-bc30-0e5ec36d3393" />
     
-    - Patients :
+- Patients :
       
-    <img width="419" alt="image" src="https://github.com/user-attachments/assets/ee32a5aa-cd48-4c39-be30-34a03d227b6d" />
+<img width="419" alt="image" src="https://github.com/user-attachments/assets/ee32a5aa-cd48-4c39-be30-34a03d227b6d" />
     
-    - Users :
+- Users :
       
-    <img width="598" alt="image" src="https://github.com/user-attachments/assets/2fc6d696-6b81-4841-9fc5-1eaa2f16b2cc" />
+<img width="598" alt="image" src="https://github.com/user-attachments/assets/2fc6d696-6b81-4841-9fc5-1eaa2f16b2cc" />
     
-    - Authorities :
+- Authorities :
       
-    <img width="295" alt="image" src="https://github.com/user-attachments/assets/f0413515-eab1-4c54-998f-41cf5efb3a26" />
+<img width="295" alt="image" src="https://github.com/user-attachments/assets/f0413515-eab1-4c54-998f-41cf5efb3a26" />
 
 ## Résultats :
 - Page Login :
