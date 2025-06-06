@@ -517,10 +517,9 @@ public class PatientController {
 
 ### ⚙️ Fichiers de configuration
 - application.properties :
-  ```
-  spring.datasource.url=jdbc:h2:mem:hospital
-  spring.h2.console.enabled=true
-  ```
+
+  <img width="773" alt="image" src="https://github.com/user-attachments/assets/551adc74-5903-4e58-a5ae-64e689941993" />
+
 - schema.sql : Script d'initialisation de la base
 
 ## 🔄 Workflow d'Exécution
