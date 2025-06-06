@@ -136,6 +136,36 @@ Application web complète pour la gestion des patients dans un environnement hos
 
 ### Architecture MVC
 
+Diagramme de Séquence MVC
+
+```mermaid
+sequenceDiagram
+    participant Vue as Vue (Thymeleaf)
+    participant Controller as Controller
+    participant Service as Service
+    participant Repository as Repository
+    
+    Vue->>Controller: Requête HTTP (GET/POST)
+    Controller->>Service: Appel métier
+    Service->>Repository: Accès données JPA
+    Repository-->>Service: Résultats DB
+    Service-->>Controller: Données traitées
+    Controller-->>Vue: Modèle + Vue HTML
+```
+
+Workflow de persistance :
+    ```mermaid
+    sequenceDiagram
+        participant App as Application
+        participant JPA as JPA/Hibernate
+        participant DB as Base de données
+        
+        App->>JPA: patientRepository.save(patient)
+        JPA->>DB: INSERT INTO patient...
+        DB-->>JPA: ID généré
+        JPA-->>App: Patient persisté avec ID
+    ```
+    
 #### 🗂 Package entities
 - **Patient.java**  
   Entité JPA représentant un patient avec :
@@ -350,8 +380,6 @@ public class SecurityConfig {
     }
 }
 
-
-
 ```
 Options d'authentification :
 1. InMemory (pour tests)
@@ -483,6 +511,23 @@ public class PatientController {
 }
 ```
 
+``` mermaid
+    flowchart LR
+        A[Controller] -->|Appelle| B[PatientRepository]
+        B -->|Auto-implémente| C[Requêtes SQL]
+        C -->|Retourne| D[Résultats paginés]
+    ```
+
+
+```mermaid
+flowchart TD
+    A[PatientController] -->|Gère| B[Patients]
+    A -->|Utilise| C[PatientRepository]
+    D[SecurityController] -->|Fournit| E[Vues Sécurité]
+    F[HopitalApplication] -->|Configure| G[Sécurité+DB]
+    G -->|Initialise| H[Données de test]
+```
+
 ##### 🔐 SecurityController
 
 <img width="773" alt="image" src="https://github.com/user-attachments/assets/bd9e4804-f5b1-4338-bb7c-35afd0d37dd1" />
@@ -512,51 +557,9 @@ public class PatientController {
 
 - schema.sql : Script d'initialisation de la base
 
-  ```
   create table if not exists users(username varchar(50) not null primary key,password varchar(500) not null,enabled boolean not null);
   create table if not exists authorities (username varchar(50) not null,authority varchar(50) not null,constraint fk_authorities_users foreign key(username) references users(username));
   create unique index IF NOT EXISTS ix_auth_username on authorities (username,authority);
-  ```
-
-
-## 🔄 Workflow d'Exécution
-
-Workflow de persistance :
-    ```mermaid
-    sequenceDiagram
-        participant App as Application
-        participant JPA as JPA/Hibernate
-        participant DB as Base de données
-        
-        App->>JPA: patientRepository.save(patient)
-        JPA->>DB: INSERT INTO patient...
-        DB-->>JPA: ID généré
-        JPA-->>App: Patient persisté avec ID
-    ```
-    ``` mermaid
-    flowchart LR
-        A[Controller] -->|Appelle| B[PatientRepository]
-        B -->|Auto-implémente| C[Requêtes SQL]
-        C -->|Retourne| D[Résultats paginés]
-    ```
-
-### Diagramme de Séquence MVC
-
-```mermaid
-sequenceDiagram
-    participant Vue as Vue (Thymeleaf)
-    participant Controller as Controller
-    participant Service as Service
-    participant Repository as Repository
-    
-    Vue->>Controller: Requête HTTP (GET/POST)
-    Controller->>Service: Appel métier
-    Service->>Repository: Accès données JPA
-    Repository-->>Service: Résultats DB
-    Service-->>Controller: Données traitées
-    Controller-->>Vue: Modèle + Vue HTML
-```
-
 
 
 ## 🚀 Classe Principale 
@@ -675,15 +678,6 @@ public class ThymeleafSpringDataJpaMvcApplication {
     }
 
 }
-```
-
-```mermaid
-flowchart TD
-    A[PatientController] -->|Gère| B[Patients]
-    A -->|Utilise| C[PatientRepository]
-    D[SecurityController] -->|Fournit| E[Vues Sécurité]
-    F[HopitalApplication] -->|Configure| G[Sécurité+DB]
-    G -->|Initialise| H[Données de test]
 ```
 
 ## Base de données :
