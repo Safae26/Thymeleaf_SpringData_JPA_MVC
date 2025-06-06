@@ -188,43 +188,101 @@ Fonctionnalités :
 - Chargement immédiat des rôles (EAGER)
 
 ## 📚 Repositories
-```java
-public interface AppRoleRepository extends JpaRepository<AppRole, String> {}
 
-public interface AppUserRepository extends JpaRepository<AppUser, Long> {
-    AppUser findByUsername(String username);
-}
-```
+<img width="769" alt="image" src="https://github.com/user-attachments/assets/9d0cda75-c124-49b6-844c-8bf07ce81f2f" />
+
+<img width="771" alt="image" src="https://github.com/user-attachments/assets/a20e2bdb-c3f7-4460-8f60-14bc4e15ae91" />
+
 Avantages :
 - CRUD automatique via JpaRepository
 - Recherche d'utilisateur par username
 
 ## 🛠️ Services
+
+
+<img width="785" alt="aser" src="https://github.com/user-attachments/assets/3bdd8d76-9d00-49b0-b18c-a3138381c546" />
+
 ```java
-public interface AccountService {
-    AppUser addNewUser(String username, String password, String confirmPassword);
-    void addRoleToUser(String username, String roleName);
-    UserDetails loadUserByUsername(String username);
-}
+package net.safae.thymeleaf_springdata_jpa_mvc.security.service;
 
-@Service @Transactional @RequiredArgsConstructor
+import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
+import net.safae.thymeleaf_springdata_jpa_mvc.security.entities.AppRole;
+import net.safae.thymeleaf_springdata_jpa_mvc.security.entities.AppUser;
+import net.safae.thymeleaf_springdata_jpa_mvc.security.repo.AppRoleRepository;
+import net.safae.thymeleaf_springdata_jpa_mvc.security.repo.AppUserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.*;
+
+import java.util.UUID;
+
+@Service
+@Transactional
+@AllArgsConstructor
 public class AccountServiceImpl implements AccountService {
-    private final AppUserRepository userRepo;
-    private final AppRoleRepository roleRepo;
-    private final PasswordEncoder passwordEncoder;
+    private AppUserRepository appUserRepository;
+    private PasswordEncoder passwordEncoder;
+    private AppRoleRepository appRoleRepository;
+    private AppUserRepository userRepository;
+    private AppRoleRepository roleRepository;
 
-    // Implémentation des méthodes
-}
+    /*
+    public AccountServiceImpl(AppUserRepository appUserRepository, AppRoleRepository appRoleRepository) {
+        this.userRepository = appUserRepository;
+        this.roleRepository = appRoleRepository;
+    }
+     */
 
-@Service @AllArgsConstructor
-public class UserDetailServiceImpl implements UserDetailsService {
-    private final AccountService accountService;
-    
-    public UserDetails loadUserByUsername(String username) {
-        // Conversion AppUser → UserDetails
+    @Override
+    public AppUser addNewUser(String username, String password, String email, String confirmPassword) {
+        AppUser appUser = appUserRepository.findByUsername(username);
+        if(appUser != null) throw new RuntimeException("User already exists");
+        if(!password.equals(confirmPassword)) throw new RuntimeException("Passwords do not match");
+        appUser = AppUser.builder()
+                .userId(UUID.randomUUID().toString())
+                .username(username)
+                .password(passwordEncoder.encode(password))
+                .email(email)
+                .build();
+        AppUser savedAppUser = appUserRepository.save(appUser);
+        return savedAppUser;
+    }
+
+    @Override
+    public AppRole addNewRole(String role) {
+        AppRole appRole = appRoleRepository.findById(role).orElse(null);
+        if(appRole != null) throw new RuntimeException("This role already exists");
+        appRole= AppRole.builder()
+                .role(role)
+                .build();
+        return appRoleRepository.save(appRole);
+    }
+
+    @Override
+    public void addRoleToUser(String username, String role) {
+        AppUser appUser = appUserRepository.findByUsername(username);
+        AppRole appRole = appRoleRepository.findById(role).get();
+        appUser.getRoles().add(appRole);
+        //appUserRepository.save(appUser);
+    }
+
+    @Override
+    public void removeRoleFromUser(String username, String role) {
+        AppUser appUser = appUserRepository.findByUsername(username);
+        AppRole appRole = appRoleRepository.findById(role).get();
+        appUser.getRoles().remove(appRole);
+
+    }
+
+    @Override
+    public AppUser loadUserByUsername(String username) {
+        return appUserRepository.findByUsername(username);
     }
 }
 ```
+
+<img width="771" alt="image" src="https://github.com/user-attachments/assets/30ff1cac-523d-4114-afc2-6294cb303489" />
+
 Fonctionnalités clés :
 - Gestion transactionnelle
 - Hachage des mots de passe
