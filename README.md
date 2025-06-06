@@ -52,10 +52,10 @@ Application web complète pour la gestion des patients dans un environnement hos
 | jQuery | 3.6 | Manipulation du DOM |
 
 ### Bases de Données
-| Technologie | Usage |
-|------------|-------|
-| H2 | In Memory Database |
-| MySQL | Locale |
+| Technologie | Usage | Accès |
+|------------|-------|-------|
+| H2 | In Memory Database | http://localhost:8084/h2-console |
+| MySQL | Locale | http://localhost |
 
 ## 📦 Dépendances Maven
 
@@ -164,7 +164,7 @@ Application web complète pour la gestion des patients dans un environnement hos
 
 #### 🔐 Package security - Gestion d'Authentification
 
-### 🏷️ Entités de Sécurité
+##### 🏷️ Entités de Sécurité
 
 <img width="772" alt="image" src="https://github.com/user-attachments/assets/4178ae2c-e74e-440c-ad06-ab45d9114b60" />
 
@@ -175,7 +175,7 @@ Fonctionnalités :
 - Relation ManyToMany entre utilisateurs et rôles
 - Chargement immédiat des rôles (EAGER)
 
-## 📚 Repositories
+##### 📚 Repositories
 
 <img width="769" alt="image" src="https://github.com/user-attachments/assets/9d0cda75-c124-49b6-844c-8bf07ce81f2f" />
 
@@ -185,8 +185,7 @@ Avantages :
 - CRUD automatique via JpaRepository
 - Recherche d'utilisateur par username
 
-## 🛠️ Services
-
+##### 🛠️ Services
 
 <img width="785" alt="aser" src="https://github.com/user-attachments/assets/3bdd8d76-9d00-49b0-b18c-a3138381c546" />
 
@@ -376,40 +375,9 @@ Fonctionnalités activées :
 Cela offre une sécurité complète tout en restant flexible pour différentes méthodes d'authentification.
 
 
-#### 🌐 Package web
-- PatientController.java
-Contrôleur MVC avec :
-```
-@GetMapping("/patients")
-public String index(Model model, 
-                   @RequestParam(defaultValue = "0") int page,
-                   @RequestParam(defaultValue = "") String keyword) {
-    // Pagination et recherche
-}
-```
+#### 🌐 Package web - Contrôleurs Principaux
 
-Workflow de persistance :
-    ```mermaid
-    sequenceDiagram
-        participant App as Application
-        participant JPA as JPA/Hibernate
-        participant DB as Base de données
-        
-        App->>JPA: patientRepository.save(patient)
-        JPA->>DB: INSERT INTO patient...
-        DB-->>JPA: ID généré
-        JPA-->>App: Patient persisté avec ID
-    ```
-    ``` mermaid
-    flowchart LR
-        A[Controller] -->|Appelle| B[PatientRepository]
-        B -->|Auto-implémente| C[Requêtes SQL]
-        C -->|Retourne| D[Résultats paginés]
-    ```
-
-## 🌐 Package Web - Contrôleurs Principaux
-
-### 🏥 PatientController
+##### 🏥 PatientController 
 
 ```java
 package net.safae.thymeleaf_springdata_jpa_mvc.web;
@@ -515,18 +483,18 @@ public class PatientController {
 }
 ```
 
-### 🔐 SecurityController
+##### 🔐 SecurityController
 
 <img width="773" alt="image" src="https://github.com/user-attachments/assets/bd9e4804-f5b1-4338-bb7c-35afd0d37dd1" />
 
 
-### Sécurité
+###### Sécurité
 - 🔒 2 modes d'authentification:
   - InMemory (test)
   - JDBC (prod)
 - 👥 Gestion des rôles
 
-### 📁 Templates
+###### 📁 Templates
 ```
 | Fichier              | Description                  |
 |----------------------|------------------------------|
@@ -552,6 +520,25 @@ public class PatientController {
 
 
 ## 🔄 Workflow d'Exécution
+
+Workflow de persistance :
+    ```mermaid
+    sequenceDiagram
+        participant App as Application
+        participant JPA as JPA/Hibernate
+        participant DB as Base de données
+        
+        App->>JPA: patientRepository.save(patient)
+        JPA->>DB: INSERT INTO patient...
+        DB-->>JPA: ID généré
+        JPA-->>App: Patient persisté avec ID
+    ```
+    ``` mermaid
+    flowchart LR
+        A[Controller] -->|Appelle| B[PatientRepository]
+        B -->|Auto-implémente| C[Requêtes SQL]
+        C -->|Retourne| D[Résultats paginés]
+    ```
 
 ### Diagramme de Séquence MVC
 
@@ -690,18 +677,6 @@ public class ThymeleafSpringDataJpaMvcApplication {
 }
 ```
 
-## ⚙️ Configuration (application.properties)
-Accès console H2 : http://localhost:8084/h2-console
-```
-# Application
-spring.application.name=Hospital
-server.port=8084
-
-# Database
-spring.datasource.url=jdbc:h2:mem:hospital
-spring.h2.console.enabled=true
-spring.h2.console.path=/h2-console
-```
 ```mermaid
 flowchart TD
     A[PatientController] -->|Gère| B[Patients]
@@ -712,7 +687,7 @@ flowchart TD
 
 ```
 
-- DB :
+DB :
   
 <img width="744" alt="db" src="https://github.com/user-attachments/assets/4ca21ca0-beb2-44c9-adb3-af735c60eb95" />
 
@@ -755,15 +730,15 @@ Tables :
   <img width="1280" alt="image" src="https://github.com/user-attachments/assets/3a0b756d-ac64-447e-a1fe-74bbf38b3c87" />
 - Page Suppression: Je supprime Leila avec id=16
   <img width="1280" alt="image" src="https://github.com/user-attachments/assets/bbecaacf-b028-4092-95a0-0660430dbec3" />
-- Page Suppréssion: Aprés la suppression
+- Page Suppression: Après la suppression
   <img width="1280" alt="image" src="https://github.com/user-attachments/assets/6b903568-aee5-4d96-a64b-5317db5a5eed" />
 - Page Recherche 🔍:
   <img width="1280" alt="image" src="https://github.com/user-attachments/assets/34d5e869-432f-4e94-b5a1-5f60d21585fe" />
-- Validation du formulaire
+- Validation du formulaire:
   <img width="1280" alt="image" src="https://github.com/user-attachments/assets/3730d51f-84ba-48f3-b2fe-33527dd2b0d5" />
 - Page Ajouter:
   <img width="1279" alt="image" src="https://github.com/user-attachments/assets/ceb91d11-df8b-46ac-bcaa-bcce425a5909" />
-- Page Ajouter: Aprés l'ajout
+- Page Ajouter: Après l'ajout
   <img width="1280" alt="image" src="https://github.com/user-attachments/assets/886ee31a-e1f0-451a-a412-eef17ce6d49a" />
 
 ## 🏁 Conclusion
@@ -795,5 +770,5 @@ pie
     "Tests" : 10
 ```
 
-# Auteur : 
+## Auteur : 
 Safae ERAJI
